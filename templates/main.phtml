@@ -1,0 +1,42 @@
+<link rel="stylesheet" type="text/css" href="/translator/css/style_main.css">
+<?php // выводим на страницу сайта заголовки HTML-таблицы ?>
+<body>
+	<div class="table-title">
+	<a href="add.php" class="c right">Add new word</a>
+	<h1 align="center">Vocabulary</h1>
+	</div>
+	<table class="table-fill">
+	<thead>
+	<tr>
+	<th class="text-left">ID</th>
+	<th class="text-left">Word</th>
+	<th class="text-left">Description</th>
+	<th class="text-left">Translate</th>
+	<th class="text-left">Delete</th>
+	<th class="text-left">Edit</th>
+	</tr>
+	</thead>
+	<tbody class="table-hover">
+	
+	<?php foreach($data as $row):?>
+	<tr>
+		<td> <?=$row['id']?></td>
+		<td> <?=$row['word'] ?></td>
+		<td> <?=$row['descr'] ?></td>
+		<td> <?=$row['trans'] ?></td>
+		<?php	//вывод колонки со ссылками на страницу удаления ?>
+		<td>
+			<a name="del" href="delete.php?num=<?= $row['id']?>">
+				<img width=20px src="img/delete.png" title="Remove this note">
+			</a>
+		</td>
+		<?php	//вывод колонки со ссылками на страницу редактирования ?>
+		<td>
+			<a name="del" href="edit.php?num=<?= $row['id']?>">
+				<img width=40px src="img/edit.png" title="Edit this note">
+			</a>
+		</td>
+    </tr>
+	<?php endforeach; ?>
+	</tbody>
+	</table>
