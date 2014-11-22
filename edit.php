@@ -1,6 +1,7 @@
 <?php
 	//Подключение к БД
 	include "db.php";
+	// here
 	
 	if(isset($_GET['num']))
 	{
