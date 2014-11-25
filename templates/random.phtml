@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Random form</title>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="css/style_random.css">
+<p align="center"><a href="/vocabulary/main.php" class="c">Return to main page</a></p>
+<table align="center" class="text">
+	<form action='' method=POST>
+		<tr>
+			<td>Word (EN) :</td>
+			<td><?php echo get_random_word ($random_id);?></td>
+		</tr>
+		<tr>
+			<td>Translate (RU) :</td>
+			<td><input class="input-width" type="text" name="trans"></td>
+		</tr>
+		<tr>
+			<td align="center" colspan="2" ><input type="submit" class="c" value="OK"></td>
+		</tr>
+	</form>
+</table>
+</body>
+</html>

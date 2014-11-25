@@ -74,10 +74,42 @@ function get_word ($num)
 	return $row;
 }
 
+function get_trans ($word)
+{
+	//Выбираем запись для редактирования из бд
+	
+	$result = mysql_query("SELECT trans FROM words WHERE word = '$word'")
+		or die(mysql_error());
+	$row = mysql_fetch_array($result);
+	return $row["trans"];
+}
+
+
 function edit_word ($num, $word, $descr, $trans)
 {
 	$word = htmlentities($word, ENT_QUOTES);
 	$descr = ucfirst(htmlentities($descr, ENT_QUOTES));
 	$trans = htmlentities($trans, ENT_QUOTES);
 	$result = mysql_query ("UPDATE words SET word='$word', descr='$descr', trans ='$trans' WHERE id='$num'");  
+}
+
+function get_random_word ($random)
+{
+	$qr_result = mysql_query("SELECT word FROM `words` WHERE id = '$random'")
+		or die(mysql_error());
+	$row = mysql_fetch_array($qr_result);
+	return $row["word"];
+}
+
+function select_random_id()
+{
+	$range_result = mysql_query( " SELECT MAX(`id`) AS max_id , MIN(`id`) AS min_id FROM `words` ");
+	$range_row = mysql_fetch_object( $range_result );
+	$random = mt_rand( $range_row->min_id , $range_row->max_id );
+	$result = mysql_query( " SELECT * FROM `words` WHERE `id` >= $random LIMIT 0,1 ");
+	if($result)
+	{
+		$data = mysql_fetch_assoc($result);
+		return $data['id'];
+	}
 }
