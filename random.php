@@ -1,24 +1,31 @@
 <?php 
 include "db.php";
-$random_id = (int)select_random_id();
-$rand_word = get_random_word ($random_id);
 
-if(!empty($_POST['trans']))
+// -=-=-=-=-= рандомайзер=-=-=-=--
+// 1) генерируем ай ди
+$rand_id = select_random_id();
+// 2) достаем по нему данные из БД
+$rand_word = get_random_word ($rand_id);
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=--
+
+if(isset($_POST['trans']))
 {
-	get_trans ($rand_word);
-	$translate = get_trans ($rand_word);
-	var_dump($translate);
-	if($_POST['trans'] == $translate)
-	{
-		echo "Right!";
-	}
-	else
-	{
-		echo "False!";
-	}
+// 1) получаем айди с рандом.рнр
+$id = $_POST['id'];
+// 2) получаем то, что ввел юзер
+$user_trans = $_POST['trans'];
+// 3) вытягиваем из БД транс по ай ди
+$trans = get_trans ($id);
+// 4) сравниваем ввод юзера и перевод из БД
+if($trans == $user_trans)
+{
+	$msg = "Right!";
 }
 else
 {
-echo "Input your translate!";
+	$msg = "Wrong! Right translation is \"$trans\" and you typed \"$user_trans\"";
 }
+}
+
+// 3) отображаем форму с вордом
 include "templates/random.phtml";

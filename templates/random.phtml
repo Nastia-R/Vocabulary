@@ -8,10 +8,10 @@
 <link rel="stylesheet" type="text/css" href="css/style_random.css">
 <p align="center"><a href="/vocabulary/main.php" class="c">Return to main page</a></p>
 <table align="center" class="text">
-	<form action='' method=POST>
+	<form action='' method="POST">
 		<tr>
 			<td>Word (EN) :</td>
-			<td><?php echo get_random_word ($random_id);?></td>
+			<td><?=$rand_word ?></td>
 		</tr>
 		<tr>
 			<td>Translate (RU) :</td>
@@ -20,7 +20,11 @@
 		<tr>
 			<td align="center" colspan="2" ><input type="submit" class="c" value="OK"></td>
 		</tr>
+		<input type="hidden" name="id" value="<?=$rand_id?>">
 	</form>
 </table>
+<?php if(isset($msg)):?>
+	<p class='answer_good'><?=$msg;?></p>
+<?php endif;?>
 </body>
 </html>

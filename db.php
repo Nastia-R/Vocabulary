@@ -74,11 +74,10 @@ function get_word ($num)
 	return $row;
 }
 
-function get_trans ($word)
+function get_trans ($id)
 {
 	//Выбираем запись для редактирования из бд
-	
-	$result = mysql_query("SELECT trans FROM words WHERE word = '$word'")
+	$result = mysql_query("SELECT trans FROM words WHERE id = '$id'")
 		or die(mysql_error());
 	$row = mysql_fetch_array($result);
 	return $row["trans"];
@@ -112,4 +111,41 @@ function select_random_id()
 		$data = mysql_fetch_assoc($result);
 		return $data['id'];
 	}
+}
+
+function is_user_exist ($user)
+{
+	//Проверка на существование добавляемого слова в словаре
+	$query = mysql_query("SELECT * FROM users WHERE user = '$user'");
+	$counter = mysql_query("SELECT count(1) FROM users WHERE `user` = '$user'");
+	if ($counter === false) 
+	{
+		echo mysql_error();
+	}
+	else
+	{
+		$count = mysql_result($counter, 0);
+		if($count == 0)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+}
+
+function add_user ($user, $email, $pass)
+{
+	$user = htmlentities($user, ENT_QUOTES);
+	$email = ucfirst(htmlentities($email, ENT_QUOTES));
+	$pass = htmlentities($pass, ENT_QUOTES);
+	
+	//Перевод строки в массив по переводу строки
+	// $explode_trans = explode("/r/n", $trans);
+
+	//Вставляем данные, подставляя их в запрос
+	return mysql_query("INSERT INTO `users` (`user`, `email`, `pass`) 
+		VALUES ('".$user."','".$email."', '".$pass."')");
 }

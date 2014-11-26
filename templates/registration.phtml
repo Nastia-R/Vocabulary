@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="css/style_registration.css">
+	<title>Registration</title>
+</head>
+<body>
+	<div class="table-title">
+		<h1 align="center" >Registration form</h1>
+		<br/>
+	</div>
+	<?php if(isset($warning)):?>
+		<p class='answer_bad'><?=$warning;?></p>
+	<?php endif;?> 
+	<?php if(isset($msg)):?>
+		<p class='answer_good'><?=$msg;?></p>
+	<?php endif;?>
+	<table align="center" class="text">
+		<form action='' method="POST">
+			<tr>
+				<td>Enter your name: </td>
+				<td><input class="input-width" type="text" name='user' /></td>
+				<td><img width=25px src="img/question.png" 
+				title=
+				"Логин чувствителен к регистру (т.е. 'Sasha', 'sasha' и 'SaShA' 
+являются тремя разными пользователями);
+должен содержать только латинские буквы и цифры. " alt="Image not found."></td>
+			</tr>
+			<tr>
+				<td>Enter your email: </td>
+				<td><input class="input-width" type="email" name="email" /></td>
+			</tr>
+			<tr>
+				<td>Enter your pass : </td>
+				<td><input class="input-width" type="password" name="pass" /></td>
+				<td><img width=25px src="img/question.png" 
+				title=
+				"Пароль может содержать только латинские буквы и цифры и так же является регистрозависимым." alt="Image not found."></td>
+			</tr>
+			<tr>
+				<td align="right" colspan="2" ><input class="c" type = "submit" value = "OK" name = 'ok' /></td>
+			</tr>
+		</form>
+	</table>
+</body>
+</html>
