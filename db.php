@@ -139,7 +139,7 @@ function is_user_exist ($user)
 function add_user ($user, $email, $pass)
 {
 	$user = htmlentities($user, ENT_QUOTES);
-	$email = ucfirst(htmlentities($email, ENT_QUOTES));
+	$email = htmlentities($email, ENT_QUOTES);
 	$pass = htmlentities($pass, ENT_QUOTES);
 	
 	//Перевод строки в массив по переводу строки
@@ -148,4 +148,40 @@ function add_user ($user, $email, $pass)
 	//Вставляем данные, подставляя их в запрос
 	return mysql_query("INSERT INTO `users` (`user`, `email`, `pass`) 
 		VALUES ('".$user."','".$email."', '".$pass."')");
+}
+
+function login ($email, $pass, $remember)
+{
+	//checking security user by email and pass
+	$result = mysql_query("SELECT * FROM users WHERE email='$email' AND pass='$pass'")
+		or die(mysql_error());
+	$row = mysql_fetch_array($result);
+	
+	if($row)
+	{
+		$_SESSION['email'] = $email;
+		$_SESSION['pass'] = $pass;
+		if($remember)
+		{
+			setcookie('email', $email, time() + 3600 * 24 * 7);
+			setcookie('pass', $pass, time() + 3600 * 24 * 7);
+		}
+	}
+	else
+	{
+		return false;
+	}
+	
+	return $row;
+}
+	
+	
+function logout()
+{
+	//making cookie too old
+	
+	setcookie('email', ' ', time() - 1);
+	setcookie('pass', ' ', time() - 1);
+	
+	unset($_SESSION['email'], $_SESSION['pass']);
 }

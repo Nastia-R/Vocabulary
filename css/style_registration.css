@@ -79,3 +79,10 @@ body {
 	font-size:20px;
 	text-align: center;
 }
+p.link {
+	text-align: center;
+	color: #fafafa; 
+	text-decoration: none; 
+	vertical-align: middle;
+	margin: auto;
+}

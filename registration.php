@@ -17,12 +17,12 @@ if(isset($_POST['ok']))
 			close_connection();
 			//Если регистрация прошла успешно
 			if ($result) 
-			{
-				$msg = "Congradulation! You have been registrated!";
+			{ 
+				header("Location:authorisation.php?cong=1");
 			} 
 			else 
 			{
-				$warning = "Error!Smthng bad happened =(";
+				$warning = "Error!Smthng bad has been happened =(";
 			}
 		}
 		else

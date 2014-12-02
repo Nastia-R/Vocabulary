@@ -8,7 +8,6 @@
 <body>
 	<div class="table-title">
 		<h1 align="center" >Registration form</h1>
-		<br/>
 	</div>
 	<?php if(isset($warning)):?>
 		<p class='answer_bad'><?=$warning;?></p>
@@ -17,7 +16,7 @@
 		<p class='answer_good'><?=$msg;?></p>
 	<?php endif;?>
 	<table align="center" class="text">
-		<form action='' method="POST">
+		<form action="" method="POST">
 			<tr>
 				<td>Enter your name: </td>
 				<td><input class="input-width" type="text" name='user' /></td>
