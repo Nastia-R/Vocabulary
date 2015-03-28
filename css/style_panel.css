@@ -1,0 +1,21 @@
+#panel {
+	padding: 4px 14px; 
+	text-shadow: rgba(0,0,0,.4) 0 1px 0; 
+	color: #fafafa; 
+	font-size: 14px; 
+	font-family: "Roboto", helvetica, arial, sans-serif;
+	text-align: right;
+	background: #B6B9D1;
+}
+#panel_link {
+	text-decoration: none; 
+	color: #5f64a3;
+}
+
+#panel_link:hover { 
+	color: #fafafa;
+} 
+
+#panel_link:active { 
+	color: #222a38;
+}

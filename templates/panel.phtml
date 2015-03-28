@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<div id="panel">
+	<?php if(isset($panel_login)):?> 
+	<a href="main.php" id="panel_link">Home</a> |
+	<a href="random.php" id="panel_link">Get rand word</a> |
+	<a href="users_list.php" id="panel_link">Users list</a> |
+	<a href="authorisation.php" id="panel_link">Login</a> |
+	<a href="registration.php" id="panel_link">Registration</a>
+	<?php endif;?>
+	<?php if(isset($panel_username)):?> 
+	<a href="main.php" id="panel_link">Home</a> |
+	<a href="random.php" id="panel_link">Get rand word</a> |
+	<a href="users_list.php" id="panel_link">Users list</a> |
+	Hello, <?= "$email" . " !";?> | <a href="authorisation.php" id="panel_link">Logout</a>
+	<?php endif;?>
+</div>

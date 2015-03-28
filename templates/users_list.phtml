@@ -1,0 +1,42 @@
+<link rel="stylesheet" type="text/css" href="/vocabulary/css/style_users_list.css">
+<link rel="stylesheet" type="text/css" href="/vocabulary/css/style_panel.css">
+<body>
+<?php include "panel.phtml"; ?>
+<?php if(isset($_GET['cong'])): ?>
+	<p class='answer_good'><?=$msg;?></p>
+<?php endif; ?>
+<div class="table-title">
+	<h1 align="center">Users list</h1>
+</div>
+<table class="table-fill">
+	<thead>
+		<tr>
+			<th class="text-left">ID</th>
+			<th class="text-left">User</th>
+			<th class="text-left">Email</th>
+			<th class="text-left">Delete</th>
+			<th class="text-left">Edit</th>
+		</tr>
+	</thead>
+	<tbody class="table-hover">
+		<?php foreach($users_list as $row):?>
+		<tr>
+			<td> <?=$row['id']?></td>
+			<td> <?=$row['user'] ?></td>
+			<td> <?=$row['email'] ?></td>
+			<?php	//вывод колонки со ссылками на страницу удаления ?>
+			<td>
+				<a name="del" href="delete_user.php?num=<?= $row['id']?>">
+					<img width=20px src="img/delete.png" title="Remove this user">
+				</a>
+			</td>
+			<?php	//вывод колонки со ссылками на страницу редактирования ?>
+			<td>
+				<a name="del" href="edit_user.php?num=<?= $row['id']?>">
+					<img width=40px src="img/edit.png" title="Edit user's name">
+				</a>
+			</td>
+		</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
