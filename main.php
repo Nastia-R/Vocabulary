@@ -1,7 +1,7 @@
-<?php 	
-session_start();
-include "db.php";
-include "panel_guests.php";
-$data = get_all_words();
-close_connection();
+<?php
+require_once "panel_guests.php";
+require_once "models/words.php";
+
+$data = getAllWords();
+
 include "templates/main.phtml";
