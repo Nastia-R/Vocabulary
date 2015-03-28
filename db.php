@@ -68,9 +68,9 @@ function get_word ($num)
 {
 	//Выбираем запись для редактирования из бд
 	
-	$result1 = mysql_query("SELECT * FROM words WHERE id = '$num'")
+	$result = mysql_query("SELECT * FROM words WHERE id = '$num'")
 		or die(mysql_error());
-	$row = mysql_fetch_array($result1);
+	$row = mysql_fetch_array($result);
 	return $row;
 }
 
@@ -171,7 +171,6 @@ function login ($email, $pass, $remember)
 	{
 		return false;
 	}
-	
 	return $row;
 }
 	
@@ -184,4 +183,34 @@ function logout()
 	setcookie('pass', ' ', time() - 1);
 	
 	unset($_SESSION['email'], $_SESSION['pass']);
+}
+
+function get_all_users()
+{
+	$qr_result = mysql_query("select id, user, email from users")
+		or die(mysql_error());
+
+	$data = array() ;
+	while($row = mysql_fetch_array($qr_result))
+	{
+		$data[] = $row;	
+	}
+	return $data;
+}
+
+function get_user ($num)
+{
+	//Выбираем запись для редактирования из бд
+	
+	$result = mysql_query("SELECT * FROM users WHERE id = '$num'")
+		or die(mysql_error());
+	$row = mysql_fetch_array($result);
+	return $row;
+}
+
+function edit_user ($num, $user, $email)
+{
+	$user= htmlentities($user, ENT_QUOTES);
+	$email = htmlentities($email, ENT_QUOTES);
+	$result = mysql_query ("UPDATE users SET user='$user', email='$email' WHERE id='$num'");  
 }

@@ -10,7 +10,7 @@
 	font-family: "Roboto", helvetica, arial, sans-serif;
 	text-decoration: none; 
 	vertical-align: middle;
-	margin-left: 44%;
+	margin-left: 35%;
 } 
 
 .c:hover { 
@@ -24,12 +24,39 @@
 	background: #5f64a3; 
 }
 
+.c1  { 
+	border-top: 1px solid #222a38;
+	background: #1b1e24;
+	border-color: #1b1e24;
+	padding: 8px 16px; 
+	border-radius: 4px; 
+	text-shadow: rgba(0,0,0,.4) 0 1px 0; 
+	color: #fafafa; 
+	font-size: 16px; 
+	font-family: "Roboto", helvetica, arial, sans-serif;
+	text-decoration: none; 
+	vertical-align: middle;
+	margin-left: ;
+} 
+
+.c1:hover { 
+	border-color: #4E5066;
+	background: #4E5066; 
+
+} 
+
+.c1:active { 
+	border-color: #5f64a3;
+	background: #5f64a3; 
+}
+
 body {
   background-color: #cacde3;
   font-family: "Roboto", helvetica, arial, sans-serif;
   font-size: 16px;
   font-weight: 300;
   text-rendering: optimizeLegibility;
+  margin: 0px;
 }
 
 div.table-title {
@@ -41,13 +68,13 @@ div.table-title {
 
 .table-title h1 {
    color: #fafafa;
-   font-size: 30px;
+   font-size: 23px;
    font-weight: 400;
    font-style:normal;
    font-family: "Roboto", helvetica, arial, sans-serif;
    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
    text-transform:uppercase;
-   padding-left: 133px;
+   margin-top: 28px;
 }
 
 
@@ -192,13 +219,4 @@ float: center;
 	font-family: "Roboto", helvetica, arial, sans-serif;
 	font-size:20px;
 	text-align: center;
-}
-
-td.delete_box {
-  background-color: #cacde3;
-  font-family: "Roboto", helvetica, arial, sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  text-rendering: optimizeLegibility;
-  text-align: center;
 }

@@ -10,6 +10,7 @@
 	font-family: "Roboto", helvetica, arial, sans-serif;
 	text-decoration: none; 
 	vertical-align: middle;
+	display: inline-block;
 } 
 
 .c:hover { 
@@ -29,6 +30,7 @@ body {
 	font-size: 16px;
 	font-weight: 400;
 	text-rendering: optimizeLegibility;
+	margin: 0px;
 }
 
 .input-width{
@@ -46,7 +48,6 @@ body {
 	font-size:16px;
 	font-weight:normal;
 	background:#EBEBEB;
-	margin: auto;
 	padding: 10px 20px;
 }
 
@@ -62,4 +63,23 @@ body {
 	font-family: "Roboto", helvetica, arial, sans-serif;
 	font-size:20px;
 	text-align: center;
+}
+
+div.table-title {
+  margin: auto;
+  padding:0px;
+  table-layout: fixed;
+  width: 80%;
+}
+
+.table-title h1 {
+   color: #fafafa;
+   font-size: 23px;
+   font-weight: 400;
+   font-style:normal;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+   margin-top: 28px;
+   margin-bottom: 28px;
 }

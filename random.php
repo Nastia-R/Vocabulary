@@ -1,6 +1,7 @@
 <?php 
+session_start();
 include "db.php";
-
+include "panel_users.php";
 // -=-=-=-=-= рандомайзер=-=-=-=--
 // 1) генерируем ай ди
 $rand_id = select_random_id();

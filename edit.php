@@ -1,12 +1,10 @@
 <?php
-	//Подключение к БД
-	include "db.php";
-	// here
-	
-	if(isset($_GET['num']))
-	{
-		$edit_row = get_word ($_GET['num']);
-	}
+session_start();
+include "db.php";
+include "panel_users.php";
+if(isset($_GET['num']))
+{
+	$edit_row = get_word ($_GET['num']);
 	//Проверка на отправку формы
 	if(isset($_POST['word']))
 	{
@@ -24,4 +22,6 @@
 			$msg = "Данные успешно обновлены!";
 		}		
 	} 
-	include "templates/edit.phtml";
+}
+
+include "templates/edit.phtml";

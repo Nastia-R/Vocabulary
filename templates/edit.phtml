@@ -6,8 +6,11 @@
 </head>
 <body>
 <link rel="stylesheet" type="text/css" href="css/style_add.css">
-<p align="center"><a href="/translator/main.php" class="c">Return to main page</a></p>
-<br/><br/>
+<link rel="stylesheet" type="text/css" href="css/style_panel.css">
+<?php include "panel.phtml"; ?>
+<div class="table-title">
+	<h1 align="center">Edit word: </h1>
+</div>
  <?php if(isset($warning)):?>
 	<p class='answer_bad'><?=$warning;?></p>
  <?php endif;?>
