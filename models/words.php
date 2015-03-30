@@ -38,3 +38,61 @@ function getTranslationById($id)
   $translationArray = $translationStatement->fetch();
   return $translationArray['trans'];
 }
+
+function isWordExist ($word)
+{
+  $connection = ConnectionFabric::getInstance()->getConnection();
+  $wordExist = "'".strtolower($word)."'";
+  $stm = $connection->prepare("SELECT * FROM `words` WHERE `word` = $wordExist");
+  $stm->execute();
+  $count = $stm->fetchAll();
+	if($count == false)
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+function addWord($word, $description, $translation)
+{
+	$word = htmlentities($word, ENT_QUOTES);
+	$description = ucfirst(htmlentities($description, ENT_QUOTES));
+	$translation = htmlentities($translation, ENT_QUOTES);
+	// $explode_trans = explode("/r/n", $trans);
+
+  $connection = ConnectionFabric::getInstance()->getConnection();
+  $addWordStatement = $connection->exec("INSERT INTO `words` (`word`, `descr`, `trans`)
+		VALUES ('".$word."','".$description."', '".$translation."')");
+
+  if($addWordStatement == false)
+  {
+    return false;
+  }
+  else
+  {
+    return true;
+  }
+}
+
+function getWord($num)
+{
+  $connection = ConnectionFabric::getInstance()->getConnection();
+  $query = "SELECT * FROM words WHERE id = '$num'";
+  $getWordStatement = $connection->query($query);
+  $getWordArray = $getWordStatement->fetch();
+  return $getWordArray;
+}
+
+function editWord ($num, $word, $description, $translation)
+{
+	$word = htmlentities($word, ENT_QUOTES);
+	$description = ucfirst(htmlentities($description, ENT_QUOTES));
+  $translation = htmlentities($translation, ENT_QUOTES);
+
+  $connection = ConnectionFabric::getInstance()->getConnection();
+  $query = "UPDATE words SET word='$word', descr='$description', trans ='$translation' WHERE id='$num'";
+  $editWordStatement = $connection->query($query);
+}
