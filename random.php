@@ -1,6 +1,5 @@
 <?php
 session_start();
-include "db.php";
 include "panel_users.php";
 require_once "/models/words.php";
 // -=-=-=-=-= рандомайзер=-=-=-=--

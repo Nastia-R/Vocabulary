@@ -17,7 +17,7 @@ function close_connection()
 	mysql_close($GLOBALS['connect_to_db']);
 }
 
-function is_word_exist ($word)
+/*function is_word_exist ($word)
 {
 	$word_exist="'".strtolower($word)."'";
 	$query = mysql_query("SELECT LOWER('word') FROM 'words' WHERE `word` = $word_exist");
@@ -41,7 +41,7 @@ function add_word ($word, $descr, $trans)
 	return mysql_query("INSERT INTO `words` (`word`, `descr`, `trans`)
 		VALUES ('".$word."','".$descr."', '".$trans."')");
 }
-
+*/
 function get_word ($num)
 {
 	$result = mysql_query("SELECT * FROM words WHERE id = '$num'")
@@ -50,7 +50,7 @@ function get_word ($num)
 	return $row;
 }
 
-function edit_word ($num, $word, $descr, trans)
+function edit_word ($num, $word, $descr, $trans)
 {
 	$word = htmlentities($word, ENT_QUOTES);
 	$descr = ucfirst(htmlentities($descr, ENT_QUOTES));
@@ -58,7 +58,7 @@ function edit_word ($num, $word, $descr, trans)
 	$result = mysql_query ("UPDATE words SET word='$word', descr='$descr', trans ='$trans' WHERE id='$num'");
 }
 
-function is_user_exist ($user)
+function is_user_exist($user)
 {
 	$query = mysql_query("SELECT * FROM users WHERE user = '$user'");
 	$counter = mysql_query("SELECT count(1) FROM users WHERE `user` = '$user'");
@@ -92,7 +92,7 @@ function add_user ($user, $email, $pass)
 		VALUES ('".$user."','".$email."', '".$pass."')");
 }
 
-function login ($email, $pass, $remember)
+/*function login ($email, $pass, $remember)
 {
 	//checking security user by email and pass
 	$result = mysql_query("SELECT * FROM users WHERE email='$email' AND pass='$pass'")
@@ -126,7 +126,7 @@ function logout()
 
 	unset($_SESSION['email'], $_SESSION['pass']);
 }
-
+*/
 function get_all_users()
 {
 	$qr_result = mysql_query("select id, user, email from users")

@@ -1,7 +1,8 @@
 <?php
 include "db.php";
+require_once('models/users.php');
 session_start();
-$enter_site = false;	
+$enter_site = false;
 logout();
 
 if(isset($_GET['cong']))
