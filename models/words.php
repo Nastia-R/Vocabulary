@@ -1,4 +1,6 @@
 <?php
+// TEST change
+
 require_once "connectionFabric.php";
 function getAllWords()
 {
