@@ -34,3 +34,4 @@ if(isset($_POST['word']))
 	}
 }
 include "templates/add.phtml";
+
