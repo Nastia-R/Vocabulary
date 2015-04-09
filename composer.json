@@ -1,0 +1,26 @@
+{
+    "name": "Vocabulary",
+    "description": "Project that will help ppl to learn a new vocabulary",
+    "license": "GNU",
+    "keywords": [ "php", "vocabulary", "learning" ],
+    "authors": [
+        {
+            "name": "Anastasia Radionova",
+            "email": "hotredmulled@gmail.com"
+        },
+        {
+            "name": "Semyon Radionov",
+            "email": "simon.radionov@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": { 
+            "Models\\": "models"
+        }
+    },
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}
