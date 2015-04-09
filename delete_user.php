@@ -2,7 +2,6 @@
 session_start();
 include "db.php";
 include "panel_users.php";
-//Для работы русского языка
 mysql_query("SET NAMES utf8");
 ?>
 	<!DOCTYPE html>
@@ -32,7 +31,7 @@ if(isset($_GET['num']))
 		or die(mysql_error());
 
 	while($users_list = mysql_fetch_array($qr_result))
-	{ 
+	{
 		echo '<tr>';
 		echo '<td>' . $users_list['id'] . '</td>';
 		echo '<td>' . $users_list['user'] . '</td>';
@@ -43,17 +42,16 @@ if(isset($_GET['num']))
 		echo "<br/>";
 	}
 }
-// Если была нажата ссылка удаления, удаляем запись
-if(isset($_GET['del']) && !empty($_GET['del']) ) 
+
+if(isset($_GET['del']) && !empty($_GET['del']) )
 {
-	$query = "DELETE FROM users WHERE id = $row"; 
+	$query = "DELETE FROM users WHERE id = $row";
 	mysql_query($query) or die(mysql_error());
 	header("Location:users_list.php?cong=1");
-}	
+}
 	echo "<a name=\"row\" href=\"?num=".$row."&del=1\" class=\"c\">Delete</a>";
 	echo "<a name=\"back\" href=\"users_list.php\" class=\"c1\">Cancel</a>";
 
-	// «Закрываем соединение с сервером  базы данных
 	mysql_close($connect_to_db);
 ?>
 </html>
