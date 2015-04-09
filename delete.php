@@ -2,7 +2,7 @@
 session_start();
 include "db.php";
 include "panel_users.php";
-//Для работы русского языка
+
 mysql_query("SET NAMES utf8");
 ?>
 	<!DOCTYPE html>
@@ -45,7 +45,7 @@ if(isset($_GET['num']))
 		echo "<br/>";
 	}
 }
-// Если была нажата ссылка удаления, удаляем запись
+
 if ( isset($_GET['del']) && !empty($_GET['del']) ) 
 {
 	$query = "delete from words where id='".$_GET['num']."'"; 
@@ -55,7 +55,7 @@ if ( isset($_GET['del']) && !empty($_GET['del']) )
 	echo "<a name=\"row\" href=\"?num=".$row."&del=1\" class=\"c\">DELETE</a>";
 	echo "<a name=\"back\" href=\"main.php\" class=\"c1\">To main page</a>";
 
-	// «Закрываем соединение с сервером  базы данных
+	
 	mysql_close($connect_to_db);
 ?>
 </html>
