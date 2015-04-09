@@ -5,7 +5,8 @@ include "panel_users.php";
 require_once ('models/words.php');
 if(isset($_GET['num']))
 {
-	$edit_row = getWord($_GET['num']);
+	$newWords = new ModelWords;
+	$edit_row = $newWords->getWord($_GET['num']);
 	//Проверка на отправку формы
 	if(isset($_POST['word']))
 	{
@@ -16,8 +17,8 @@ if(isset($_GET['num']))
 		}
 		else
 		{
-			editWord($_GET['num'], $_POST['word'], $_POST['descr'], $_POST['trans']);
-			$edit_row = getWord($_GET['num']);
+			$newWords->editWord($_GET['num'], $_POST['word'], $_POST['descr'], $_POST['trans']);
+			$edit_row = $newWords->getWord($_GET['num']);
 			close_connection();
 			//вставка прошла успешно
 			$msg = "Данные успешно обновлены!";

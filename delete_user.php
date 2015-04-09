@@ -42,7 +42,7 @@ if(isset($_GET['num']))
 		echo "<br/>";
 	}
 }
-// ���� ���� ������ ������ ��������, ������� ������
+
 if(isset($_GET['del']) && !empty($_GET['del']) )
 {
 	$query = "DELETE FROM users WHERE id = $row";
@@ -52,7 +52,6 @@ if(isset($_GET['del']) && !empty($_GET['del']) )
 	echo "<a name=\"row\" href=\"?num=".$row."&del=1\" class=\"c\">Delete</a>";
 	echo "<a name=\"back\" href=\"users_list.php\" class=\"c1\">Cancel</a>";
 
-	// Ǉ�������� ���������� � ��������  ���� ������
 	mysql_close($connect_to_db);
 ?>
 </html>

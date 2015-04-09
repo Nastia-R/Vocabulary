@@ -9,9 +9,10 @@ if(isset($_POST['ok']))
 	}
 	else
 	{
-		if(isUserExist($_POST['user'], $_POST['email']) == false)
+		$newUser = new ModelUsers;
+		if($newUser->isUserExist($_POST['user'], $_POST['email']) == false)
 		{
-			$result = addUser($_POST['user'], $_POST['email'], $_POST['pass']);
+			$result = $newUser->addUser($_POST['user'], $_POST['email'], $_POST['pass']);
 			close_connection();
 
 			if ($result)

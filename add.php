@@ -13,9 +13,10 @@ if(isset($_POST['word']))
 	}
 	else
 	{
-		if(isWordExist($_POST['word']) == false)
+		$newWords = new ModelWords;
+		if($newWords->isWordExist($_POST['word']) == false)
 		{
-			$result = addWord($_POST['word'], $_POST['descr'], $_POST['trans']);
+			$result = $newWords->addWord($_POST['word'], $_POST['descr'], $_POST['trans']);
 			close_connection();
 			//Если вставка прошла успешно
 			if ($result)

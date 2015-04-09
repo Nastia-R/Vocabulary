@@ -2,11 +2,12 @@
 session_start();
 include "panel_users.php";
 require_once "/models/words.php";
+$newWords = new ModelWords;
 // -=-=-=-=-= рандомайзер=-=-=-=--
 // 1) генерируем random ай ди
-$rand_id = selectRandomId();
+$rand_id = $newWords->selectRandomId();
 // 2) достаем по нему данные из БД
-$rand_word = getWordById($rand_id);
+$rand_word = $newWords->getWordById($rand_id);
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=--
 
 if(isset($_POST['trans']))
@@ -16,7 +17,7 @@ $id = $_POST['id'];
 // 2) получаем то, что ввел юзер
 $user_trans = $_POST['trans'];
 // 3) вытягиваем из БД транс по ай ди
-$trans = getTranslationById($id);
+$trans = $newWords->getTranslationById($id);
 // 4) сравниваем ввод юзера и перевод из БД
 if($trans == $user_trans)
 {
