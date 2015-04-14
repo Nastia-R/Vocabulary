@@ -1,8 +1,8 @@
 <?php
 session_start();
-include "db.php";
+require_once('models/words.php');
 include "panel_users.php";
-
+$wordsObject = new ModelWords;
 mysql_query("SET NAMES utf8");
 ?>
 	<!DOCTYPE html>
@@ -28,34 +28,27 @@ mysql_query("SET NAMES utf8");
 <?php
 if(isset($_GET['num']))
 {
-	$row = $_GET['num'];
-	$qr_result = mysql_query("select * from words WHERE id = $row")
-		or die(mysql_error());
-
-	while($data = mysql_fetch_array($qr_result))
+	$wordId = $_GET['num'];
+	$wordsArray = $wordsObject->getWord($wordId);
+	echo '<tr>';
+	foreach($wordsArray AS $data)
 	{ 
-		echo '<tr>';
-		echo '<td>' . $data['id'] . '</td>';
-		echo '<td>' . $data['word'] . '</td>';
-		echo '<td>' . $data['descr'] . '</td>';
-		echo '<td>' . $data['trans'] . '</td>';
+		echo '<td>' . $data . '</td>';
+
+	}
 		echo '</tr>';
 		echo '</tbody>';
 		echo '</table>';
 		echo "<br/>";
-	}
 }
+	echo "<a name=\"wordId\" href=\"?num=".$wordId."&del=1\" class=\"c\">DELETE</a>";
+	echo "<a name=\"back\" href=\"main.php\" class=\"c1\">To main page</a>";
 
 if ( isset($_GET['del']) && !empty($_GET['del']) ) 
 {
-	$query = "delete from words where id='".$_GET['num']."'"; 
-	mysql_query($query) or die(mysql_error());
+	$wordsObject->deleteWord($wordId);
+
 	header("Location:delete_word.php");
 }	
-	echo "<a name=\"row\" href=\"?num=".$row."&del=1\" class=\"c\">DELETE</a>";
-	echo "<a name=\"back\" href=\"main.php\" class=\"c1\">To main page</a>";
-
-	
-	mysql_close($connect_to_db);
 ?>
 </html>

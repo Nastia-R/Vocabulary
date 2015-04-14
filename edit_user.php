@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "db.php";
+require_once('models/connectionFabric.php');
 include "panel_users.php";
 require_once('models/users.php');
 $newUser = new ModelUsers;
@@ -19,7 +19,6 @@ if(isset($_GET['num']))
 		{
 			$newUser->editUser($_GET['num'], $_POST['user'], $_POST['email']);
 			$edit_row = $newUser->getUser($_GET['num']);
-			close_connection();
 			//вставка прошла успешно
 			$msg = "Данные успешно обновлены!";
 		}

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "db.php";
+require_once('models/connectionFabric.php');
 include "panel_users.php";
 require_once ('models/words.php');
 if(isset($_GET['num']))
@@ -19,7 +19,6 @@ if(isset($_GET['num']))
 		{
 			$newWords->editWord($_GET['num'], $_POST['word'], $_POST['descr'], $_POST['trans']);
 			$edit_row = $newWords->getWord($_GET['num']);
-			close_connection();
 			//вставка прошла успешно
 			$msg = "Данные успешно обновлены!";
 		}

@@ -1,5 +1,5 @@
 <?php
-include "db.php";
+require_once('models/connectionFabric.php');
 require_once('models/users.php');
 if(isset($_POST['ok']))
 {
@@ -13,7 +13,6 @@ if(isset($_POST['ok']))
 		if($newUser->isUserExist($_POST['user'], $_POST['email']) == false)
 		{
 			$result = $newUser->addUser($_POST['user'], $_POST['email'], $_POST['pass']);
-			close_connection();
 
 			if ($result)
 			{

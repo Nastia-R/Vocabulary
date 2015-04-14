@@ -3,7 +3,7 @@ require_once "connectionFabric.php";
 class ModelWords 
 {
 
-  function getAllWords()
+  public function getAllWords()
   {
     $connection = ConnectionFabric::getInstance()->getConnection();
     $query = 'SELECT * FROM words';
@@ -11,7 +11,7 @@ class ModelWords
     return $allWordsStatement->fetchAll();
   }
 
-  function selectRandomId ()
+  public function selectRandomId ()
   {
     $connection = ConnectionFabric::getInstance()->getConnection();
     $query = "SELECT MAX(`id`) AS max_id , MIN(`id`) AS min_id FROM `words`";
@@ -24,7 +24,7 @@ class ModelWords
   	return $data['id'];
   }
 
-  function getWordById($id)
+  public function getWordById($id)
   {
     $connection = ConnectionFabric::getInstance()->getConnection();
     $query = "SELECT word FROM `words` WHERE id = '$id'";
@@ -33,7 +33,7 @@ class ModelWords
     return $randomWordArray['word'];
   }
 
-  function getTranslationById($id)
+  public function getTranslationById($id)
   {
     $connection = ConnectionFabric::getInstance()->getConnection();
     $query = "SELECT trans FROM words WHERE id = '$id'";
@@ -42,7 +42,7 @@ class ModelWords
     return $translationArray['trans'];
   }
 
-  function isWordExist ($word)
+  public function isWordExist ($word)
   {
     $connection = ConnectionFabric::getInstance()->getConnection();
     $wordExist = "'".strtolower($word)."'";
@@ -59,13 +59,11 @@ class ModelWords
   	}
   }
 
-  function addWord($word, $description, $translation)
+  public function addWord($word, $description, $translation)
   {
   	$word = htmlentities($word, ENT_QUOTES);
   	$description = ucfirst(htmlentities($description, ENT_QUOTES));
   	$translation = htmlentities($translation, ENT_QUOTES);
-  	// $explode_trans = explode("/r/n", $trans);
-
     $connection = ConnectionFabric::getInstance()->getConnection();
     $addWordStatement = $connection->exec("INSERT INTO `words` (`word`, `descr`, `trans`)
   		VALUES ('".$word."','".$description."', '".$translation."')");
@@ -80,16 +78,16 @@ class ModelWords
     }
   }
 
-  function getWord($num)
+  public function getWord($num)
   {
     $connection = ConnectionFabric::getInstance()->getConnection();
     $query = "SELECT * FROM words WHERE id = '$num'";
     $getWordStatement = $connection->query($query);
-    $getWordArray = $getWordStatement->fetch();
+    $getWordArray = $getWordStatement->fetch(PDO::FETCH_ASSOC);
     return $getWordArray;
   }
 
-  function editWord ($num, $word, $description, $translation)
+  public function editWord($num, $word, $description, $translation)
   {
   	$word = htmlentities($word, ENT_QUOTES);
   	$description = ucfirst(htmlentities($description, ENT_QUOTES));
@@ -99,4 +97,12 @@ class ModelWords
     $query = "UPDATE words SET word='$word', descr='$description', trans ='$translation' WHERE id='$num'";
     $editWordStatement = $connection->query($query);
   }
+
+  public function deleteWord($num)
+  {
+    $connection = ConnectionFabric::getInstance()->getConnection();
+    $query = "DELETE FROM `translator`.`words` WHERE `words`.`id` ='$num'";
+    $deleteWordStatement = $connection->query($query);
+  }
+
 }

@@ -104,7 +104,7 @@ class ModelUsers
 
   private function checkOnRussian($field)
   {
-    if (!preg_match("#^[a-z0-9]+$#i", $field))
+    if (!preg_match("#^[a-z0-9@]+$#i", $field))
     {
       die('Разрешены только символы a-z и цифры');
     }
@@ -119,6 +119,13 @@ class ModelUsers
     $connection = ConnectionFabric::getInstance()->getConnection();
     $query = "UPDATE users SET user='$user', email='$email' WHERE id='$num'";
     $editUserStatement = $connection->query($query);
+  }
+
+  public function deleteUser($userId)
+  {
+    $connection = ConnectionFabric::getInstance()->getConnection();
+    $query = "DELETE FROM `translator`.`users` WHERE `users`.`id` ='$userId'";
+    $deleteWordStatement = $connection->query($query);
   }
 
 }

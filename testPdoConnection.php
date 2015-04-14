@@ -1,6 +1,5 @@
 <?php
 require_once "models/connectionFabric.php";
-require_once "db.php";
 require_once "models/words.php";
 require_once "models/users.php";
 

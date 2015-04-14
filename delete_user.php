@@ -1,7 +1,8 @@
 <?php
 session_start();
-include "db.php";
+require_once('models/users.php');
 include "panel_users.php";
+$usersObject = new ModelUsers;
 mysql_query("SET NAMES utf8");
 ?>
 	<!DOCTYPE html>
@@ -26,32 +27,25 @@ mysql_query("SET NAMES utf8");
 <?php
 if(isset($_GET['num']))
 {
-	$row = $_GET['num'];
-	$qr_result = mysql_query("select id, user, email from users WHERE id = $row")
-		or die(mysql_error());
-
-	while($users_list = mysql_fetch_array($qr_result))
-	{
-		echo '<tr>';
-		echo '<td>' . $users_list['id'] . '</td>';
-		echo '<td>' . $users_list['user'] . '</td>';
-		echo '<td>' . $users_list['email'] . '</td>';
-		echo '</tr>';
-		echo '</tbody>';
-		echo '</table>';
-		echo "<br/>";
+	$userId = $_GET['num'];
+	$usersArray = $usersObject->getUser($userId);
+	echo '<tr>';
+	foreach($usersArray AS $data)
+	{ 
+		echo '<td>' . $data . '</td>';
 	}
+	echo '</tr>';
+	echo '</tbody>';
+	echo '</table>';
+	echo "<br/>";
 }
 
-if(isset($_GET['del']) && !empty($_GET['del']) )
+if ( isset($_GET['del']) && !empty($_GET['del']) ) 
 {
-	$query = "DELETE FROM users WHERE id = $row";
-	mysql_query($query) or die(mysql_error());
+	$usersObject->deleteUser($userId);
 	header("Location:users_list.php?cong=1");
 }
-	echo "<a name=\"row\" href=\"?num=".$row."&del=1\" class=\"c\">Delete</a>";
+	echo "<a name=\"userId\" href=\"?num=".$userId."&del=1\" class=\"c\">Delete</a>";
 	echo "<a name=\"back\" href=\"users_list.php\" class=\"c1\">Cancel</a>";
-
-	mysql_close($connect_to_db);
 ?>
 </html>

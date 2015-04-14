@@ -22,5 +22,7 @@
         "php": ">=5.4.0"
     },
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "phpoffice/phpexcel": "dev-master"
+    }
 }

@@ -1,5 +1,5 @@
 <?php
-include "db.php";
+require_once('models/connectionFabric.php');
 require_once('models/users.php');
 session_start();
 $newUser = new ModelUsers;
