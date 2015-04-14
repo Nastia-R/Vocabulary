@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Edit form</title>
-</head>
-<body>
-<link rel="stylesheet" type="text/css" href="css/style_add.css">
-<link rel="stylesheet" type="text/css" href="css/style_panel.css">
-<?php include "panel.phtml"; ?>
-<div class="table-title">
-<h1 align="center">Edit username and(or) email: </h1>
-</div>
- <?php if(isset($warning)):?>
-	<p class='answer_bad'><?=$warning;?></p>
- <?php endif;?>
- 
- <?php if(isset($msg)):?>
-	<p class='answer_good'><?=$msg;?></p>
- <?php endif;?>
- 
- <table align="center" class="text">
-	<form id="edit_form" action="edit_user.php?num=<?php echo $edit_row['id'] ?>" method=POST>
-		<tr>
-			<td>Enter new user-name:</td>
-			<td><input class="input-width" type="text" name="user" value="<?=$edit_row['user'] ?>" /></td>
-		</tr>
-		<tr>
-			<td>Enter new email: </td>
-			<td><input class="input-width" type="email" name="email" value="<?=$edit_row['email'] ?>" /></td>
-		</tr>
-		<tr>
-			<td align="right" colspan="2" ><a href="#" class="c" onclick="document.getElementById('edit_form').submit();">Update</a></td>
-		</tr>
-	</form>
-</table>
-</body>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/style_add.css">
+		<link rel="stylesheet" type="text/css" href="css/style_panel.css">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Edit form</title>
+	</head>
+	<body>
+		<?php include "panel.phtml"; ?>
+		<div class="table-title">
+		<h1 align="center">Edit username and(or) email: </h1>
+		</div>
+		<?php if(isset($warning)):?>
+			<p class='answer_bad'><?=$warning;?></p>
+		<?php endif;?>
+		 
+		<?php if(isset($msg)):?>
+			<p class='answer_good'><?=$msg;?></p>
+		<?php endif;?>
+		 
+		<table align="center" class="text">
+			<form id="edit_form" action="edit_user.php?num=<?php echo $edit_row['id'] ?>" method=POST>
+				<tr>
+					<td>Enter new user-name:</td>
+					<td><input class="input-width" type="text" name="user" value="<?=$edit_row['user'] ?>" /></td>
+				</tr>
+				<tr>
+					<td>Enter new email: </td>
+					<td><input class="input-width" type="email" name="email" value="<?=$edit_row['email'] ?>" /></td>
+				</tr>
+				<tr>
+					<td align="right" colspan="2" ><a href="#" class="c" onclick="document.getElementById('edit_form').submit();">Update</a></td>
+				</tr>
+			</form>
+		</table>
+	</body>
+</html>

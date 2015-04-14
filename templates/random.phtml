@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Random form</title>
-</head>
-<body>
-<link rel="stylesheet" type="text/css" href="css/style_random.css">
-<link rel="stylesheet" type="text/css" href="css/style_panel.css">
-<?php include"panel.phtml"; ?>
-<table align="center" class="text">
-	<form action='' method="POST">
-		<tr>
-			<td>Word (EN) :</td>
-			<td><?=$rand_word ?></td>
-		</tr>
-		<tr>
-			<td>Translate (RU) :</td>
-			<td><input class="input-width" type="text" name="trans"></td>
-		</tr>
-		<tr>
-			<td align="center" colspan="2" ><input type="submit" class="c" value="OK"></td>
-		</tr>
-		<input type="hidden" name="id" value="<?=$rand_id?>">
-	</form>
-</table>
-<?php if(isset($msg)):?>
-	<p class='answer_good'><?=$msg;?></p>
-<?php endif;?>
-</body>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/style_random.css">
+		<link rel="stylesheet" type="text/css" href="css/style_panel.css">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Random form</title>
+	</head>
+	<body>
+		<?php include"panel.phtml"; ?>
+		<table align="center" class="text">
+			<form action='' method="POST">
+				<tr>
+					<td>Word (EN) :</td>
+					<td><?=$rand_word ?></td>
+				</tr>
+				<tr>
+					<td>Translate (RU) :</td>
+					<td><input class="input-width" type="text" name="trans"></td>
+				</tr>
+				<tr>
+					<td align="center" colspan="2" ><input type="submit" class="c" value="OK"></td>
+				</tr>
+				<input type="hidden" name="id" value="<?=$rand_id?>">
+			</form>
+		</table>
+		<?php if(isset($msg)):?>
+			<p class='answer_good'><?=$msg;?></p>
+		<?php endif;?>
+	</body>
 </html>

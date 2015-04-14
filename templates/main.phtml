@@ -28,13 +28,11 @@
 		<td> <?=$row['word'] ?></td>
 		<td> <?=$row['descr'] ?></td>
 		<td> <?=$row['trans'] ?></td>
-		<?php	//вывод колонки со ссылками на страницу удаления ?>
 		<td>
 			<a name="del" href="delete.php?num=<?= $row['id']?>">
 				<img width=20px src="img/delete.png" title="Remove this note">
 			</a>
 		</td>
-		<?php	//вывод колонки со ссылками на страницу редактирования ?>
 		<td>
 			<a name="del" href="edit.php?num=<?= $row['id']?>">
 				<img width=40px src="img/edit.png" title="Edit this note">

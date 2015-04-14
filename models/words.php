@@ -61,9 +61,9 @@ class ModelWords
 
   public function addWord($word, $description, $translation)
   {
-  	$word = htmlentities($word, ENT_QUOTES);
+  	$word = lcfirst(htmlentities($word, ENT_QUOTES));
   	$description = ucfirst(htmlentities($description, ENT_QUOTES));
-  	$translation = htmlentities($translation, ENT_QUOTES);
+  	$translation = lcfirst(htmlentities($translation, ENT_QUOTES));
     $connection = ConnectionFabric::getInstance()->getConnection();
     $addWordStatement = $connection->exec("INSERT INTO `words` (`word`, `descr`, `trans`)
   		VALUES ('".$word."','".$description."', '".$translation."')");
