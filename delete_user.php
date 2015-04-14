@@ -1,7 +1,7 @@
 <?php
-session_start();
 require_once('models/users.php');
-include "panel_users.php";
+require_once ('models/acl.php');
+
 $usersObject = new ModelUsers;
 mysql_query("SET NAMES utf8");
 ?>

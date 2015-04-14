@@ -1,8 +1,8 @@
 <?php
-session_start();
 require_once('models/connectionFabric.php');
-include "panel_users.php";
+require_once ('models/acl.php');
 require_once('models/users.php');
+
 $newUser = new ModelUsers;
 if(isset($_GET['num']))
 {

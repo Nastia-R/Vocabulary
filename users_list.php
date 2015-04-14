@@ -1,8 +1,8 @@
 <?php
-session_start();
 require_once('models/connectionFabric.php');
 require_once('models/users.php');
-include "panel_users.php";
+require_once ('models/acl.php');
+
 $newUser = new ModelUsers;
 $users_list = $newUser->getAllUsers();
 

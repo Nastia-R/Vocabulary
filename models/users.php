@@ -1,5 +1,6 @@
 ﻿<?php
-require_once "connectionFabric.php";
+require_once ('connectionFabric.php');
+require_once('models/session.php');
 class ModelUsers
 {
   public function isUserExist($user, $email)

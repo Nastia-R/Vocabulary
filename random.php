@@ -1,7 +1,6 @@
 <?php
-session_start();
-include "panel_users.php";
-require_once "/models/words.php";
+require_once ('models/acl.php');
+require_once ('/models/words.php');
 $newWords = new ModelWords;
 // -=-=-=-=-= рандомайзер=-=-=-=--
 // 1) генерируем random ай ди

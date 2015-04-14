@@ -1,6 +1,5 @@
 <?php
-session_start();
-include "panel_users.php";
+require_once ('models/acl.php');
 require_once ('models/words.php');
 //Проверка на отправку формы
 if(isset($_POST['word']))
@@ -16,6 +15,7 @@ if(isset($_POST['word']))
 		if($newWords->isWordExist($_POST['word']) == false)
 		{
 			$result = $newWords->addWord($_POST['word'], $_POST['descr'], $_POST['trans']);
+			var_dump($_POST['word'],$_POST['descr'], $_POST['trans']);
 			//Если вставка прошла успешно
 			if ($result)
 			{

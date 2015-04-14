@@ -1,9 +1,8 @@
 <?php
 require_once('models/connectionFabric.php');
 require_once('models/users.php');
-session_start();
+
 $newUser = new ModelUsers;
-$enter_site = false;
 $newUser->logout();
 
 if(isset($_GET['cong']))
