@@ -4,6 +4,9 @@
 
 <body>
 	<?php include "panel.phtml"; ?>
+	<?php if(isset($_GET['cong'])): ?>
+		<p class='answer_good'><?=$msg;?></p>
+	<?php endif; ?>
 	<div class="table-title">
 		<a href="add.php" class="c right">Add new word</a>
 		<a href="testExel.php" class="c right">Text Export</a>

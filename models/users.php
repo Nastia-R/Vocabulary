@@ -98,9 +98,9 @@ class ModelUsers
   public function getUser($num)
   {
     $connection = ConnectionFabric::getInstance()->getConnection();
-    $query = "SELECT * FROM `users` WHERE id = '$num'";
+    $query = "SELECT id, user, email FROM `users` WHERE id = '$num'";
     $getUserStatement = $connection->query($query);
-    return $getUserStatement->fetch();
+    return $getUserStatement->fetch(PDO::FETCH_ASSOC);
   }
 
   private function checkOnRussian($field)

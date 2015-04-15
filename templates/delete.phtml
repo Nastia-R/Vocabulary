@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+	<html>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="./css/style_delete.css">
+	<link rel="stylesheet" type="text/css" href="./css/style_panel.css">
+	<?php include "/panel.phtml"; ?>
+	<div class="table-title">
+		<h1 align="center">Do you really want to remove this word?</h1>
+	</div>
+	<table class="table-fill">
+	<thead>
+	<tr>
+	<th class="text-left">ID</th>
+	<th class="text-left">Word</th>
+	<th class="text-left">Description</th>
+	<th class="text-left">Translate</th>
+	</tr>
+	<br/>
+	</thead>
+	<tbody class="table-hover">
+	<?php if(isset($_GET['num'])): ?>
+		<?php $wordId = $_GET['num'];
+		$wordsArray = $wordsObject->getWord($wordId); ?>
+		<tr>
+		<?php foreach($wordsArray AS $data): ?>
+			<td><?= $data;?></td>
+		<?php endforeach; ?>
+		</tr>
+		</tbody>
+		</table>
+		<br/>
+	<?php endif; ?>
+	<?php if (isset($_GET['del']) && !empty($_GET['del'])):?>
+	<?php $wordsObject->deleteWord($wordId);
+	header("Location:main.php?cong=1"); ?>
+	<?php endif; ?>
+	<a name="wordId" href="?num=<?=$wordId;?>&del=1" class="c"?>DELETE</a>
+	<a name="back" href="main.php" php class="c1">To main page</a>

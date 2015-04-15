@@ -15,7 +15,6 @@ if(isset($_POST['word']))
 		if($newWords->isWordExist($_POST['word']) == false)
 		{
 			$result = $newWords->addWord($_POST['word'], $_POST['descr'], $_POST['trans']);
-			var_dump($_POST['word'],$_POST['descr'], $_POST['trans']);
 			//Если вставка прошла успешно
 			if ($result)
 			{
