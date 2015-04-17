@@ -24,7 +24,6 @@ array('word'=>'some word2', 'descr'=>'some descriprion2', 'trans'=>'some transla
 $columnIndex = array(
 'word'=>'A','descr'=>'B','trans'=>'C'
   );
-
 $headers = array(
 'word'=>'word', 'descr'=>'description', 'trans'=>'translation'
 );
@@ -32,28 +31,26 @@ $headers = array(
 $excelOffset = 1;
 $headerOffset = 1;
 $activeSheet = $objPHPExcel->getActiveSheet();
-echo "<table>";
-echo "<tr>";
+
+
 foreach($headers as $key=>$header)
 {
   $totalHeaderOffset = $excelOffset;
-  echo "<td>".$columnIndex[$key].$totalHeaderOffset.$header."</td>";
+  $excelCoordinate = $columnIndex[$key].$totalHeaderOffset;
+  $value = $header;
+  $activeSheet->SetCellValue($excelCoordinate, $value);
 }
- echo "</tr>"; 
 
 foreach($array as $keyData=>$dataRow)
 {
-  echo "<tr>";
-
   foreach($columnIndex as $key=>$abc) 
   {
     $totalOffset = $excelOffset + $headerOffset + $keyData;
-    echo "<td>".$abc.$totalOffset.$dataRow[$key]."</td>";
+    $excelCoordinate = $abc.$totalOffset;
+    $value = $dataRow[$key];
+    $activeSheet->SetCellValue($excelCoordinate, $value);
   }
-
-  echo "</tr>";
 }
-echo "</table>";
 
 
 
@@ -91,7 +88,7 @@ $activeSheet->SetCellValue('B4', 'розовый');
 
 // Rename sheet
 $objPHPExcel->getActiveSheet()->setTitle('vocabulary');
-		
+*/	
 // Save Excel 2007 file
 $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
 //$objWriter->save(str_replace('.php', '.xlsx', __FILE__));
@@ -104,4 +101,3 @@ header('Content-Disposition: attachment; filename="vocabulary.xlsx"');
 
 // Write file to the browser
 $objWriter->save('php://output');
-*/
