@@ -9,11 +9,7 @@ error_reporting(E_ALL);
 // Create new PHPExcel object
 $objPHPExcel = new PHPExcel();
 
-$array = array(
-array('word'=>'some word', 'descr'=>'some descriprion', 'trans'=>'some translate'),
-array('word'=>'some word1', 'descr'=>'some descriprion1', 'trans'=>'some translate1'),
-array('word'=>'some word2', 'descr'=>'some descriprion2', 'trans'=>'some translate2')
-  );
+$array = $words->getAllWords();
 
 //Set columns names
 $columnIndex = array(
@@ -28,13 +24,53 @@ $excelOffset = 1;
 $headerOffset = 1;
 $activeSheet = $objPHPExcel->getActiveSheet();
 
+$headersStyle = array(
+  'font'  => array(
+    'bold'  => true,
+    'color' => array('rgb' => 'D5DDE5'),
+    'size'  => 15,
+    'name'  => 'Roboto'
+  ),
+  'fill' => array(
+    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+    'color' => array('rgb'=>'1B1E24'),
+  ),
+  'alignment' => array(
+  'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+  )
+);
 
+$styleArray = array(
+  'font'  => array(
+    'color' => array('rgb' => '746B85'),
+    'size'  => 13,
+    'name'  => 'Verdana'
+  ),
+  'fill' => array(
+    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+    'color' => array('rgb'=>'EBEBEB'),
+  ),
+  'borders' => array(
+    'allborders' => array(
+      'style' => PHPExcel_Style_Border::BORDER_THIN,
+      'color' => array('argb' => 'C1C3D1')
+    )
+  ),
+  'alignment' => array(
+    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+  )
+);
+
+$activeSheet->getDefaultRowDimension()->setRowHeight(25);
+$activeSheet->getDefaultColumnDimension()->setWidth(35);
+$activeSheet->getRowDimension(1)->setRowHeight(25); 
 foreach($headers as $key=>$header)
 {
   $totalHeaderOffset = $excelOffset;
   $excelCoordinate = $columnIndex[$key].$totalHeaderOffset;
   $value = $header;
   $activeSheet->SetCellValue($excelCoordinate, $value);
+  $activeSheet->getStyle($excelCoordinate)->applyFromArray($headersStyle);
 }
 
 foreach($array as $keyData=>$dataRow)
@@ -45,46 +81,13 @@ foreach($array as $keyData=>$dataRow)
     $excelCoordinate = $abc.$totalOffset;
     $value = $dataRow[$key];
     $activeSheet->SetCellValue($excelCoordinate, $value);
+    $activeSheet->getStyle($excelCoordinate)->applyFromArray($styleArray);
+    $activeSheet->getStyle($excelCoordinate)->getAlignment()->setWrapText(true);
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-// Add data
-$activeSheet = $objPHPExcel->getActiveSheet();
-$activeSheet->SetCellValue(''.$columnsArray[0].'1', 'WORD');
-$activeSheet->SetCellValue(''.$columnsArray[1].'1', 'TRANSLATE');
-
-$activeSheet->SetCellValue('A2', 'green');
-$activeSheet->SetCellValue('B2', 'зеленый');
-
-$activeSheet->SetCellValue('A3', 'blue');
-$activeSheet->SetCellValue('B3', 'голубой');
-
-$activeSheet->SetCellValue('A4', 'pink');
-$activeSheet->SetCellValue('B4', 'розовый');
-
-
-
-
-
-
-
 // Rename sheet
-$objPHPExcel->getActiveSheet()->setTitle('vocabulary');
-*/	
+$activeSheet->setTitle('vocabulary');
 // Save Excel 2007 file
 $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
 //$objWriter->save(str_replace('.php', '.xlsx', __FILE__));
