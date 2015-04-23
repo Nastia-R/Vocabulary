@@ -1,9 +1,8 @@
 <?php
-require_once('models/connectionFabric.php');
-require_once('models/users.php');
+require_once('autoload.php');
 require_once ('models/acl.php');
 
-$newUser = new ModelUsers;
+$newUser = new Models\Users;
 $users_list = $newUser->getAllUsers();
 
 if(isset($_GET['cong']))

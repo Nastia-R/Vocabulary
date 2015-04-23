@@ -1,11 +1,11 @@
 <?php
+require_once('autoload.php');
 require_once('models/connectionFabric.php');
 require_once ('models/acl.php');
-require_once('models/words.php');
 
 if(isset($_GET['num']))
 {
-	$newWords = new ModelWords;
+	$newWords = new Models\Words;
 	$edit_row = $newWords->getWord($_GET['num']);
 	//Проверка на отправку формы
 	if(isset($_POST['word']))

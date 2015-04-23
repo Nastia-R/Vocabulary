@@ -1,7 +1,7 @@
 <?php
+require_once('autoload.php');
 require_once ('models/acl.php');
-require_once ('models/words.php');
-$newWords = new ModelWords;
+$newWords = new Models\Words;
 $data = $newWords->getAllWords();
 
 if(isset($_GET['cong']))

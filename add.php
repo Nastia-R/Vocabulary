@@ -1,6 +1,6 @@
 <?php
+require_once('autoload.php');
 require_once ('models/acl.php');
-require_once ('models/words.php');
 //Проверка на отправку формы
 if(isset($_POST['word']))
 {
@@ -11,7 +11,7 @@ if(isset($_POST['word']))
 	}
 	else
 	{
-		$newWords = new ModelWords;
+		$newWords = new Models\Words();
 		if($newWords->isWordExist($_POST['word']) == false)
 		{
 			$result = $newWords->addWord($_POST['word'], $_POST['descr'], $_POST['trans']);

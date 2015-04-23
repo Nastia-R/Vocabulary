@@ -1,8 +1,8 @@
 <?php
-require_once('models/words.php');
+require_once('autoload.php');
 require_once ('models/acl.php');
 
-$wordsObject = new ModelWords;
+$wordsObject = new Models\Words;
 mysql_query("SET NAMES utf8");
 
 if ( isset($_GET['del']) && !empty($_GET['del']) ) 

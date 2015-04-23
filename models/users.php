@@ -1,20 +1,28 @@
-﻿<?php
-require_once ('connectionFabric.php');
-require_once('models/session.php');
-class ModelUsers
+<?php
+namespace Models;
+use PDO;
+
+require_once('session.php');
+class Users
 {
+	private $connection;
+
+  public function __construct()
+  {
+    $this->connection = ConnectionFabric::getInstance()->getConnection();
+  }
+
   public function isUserExist($user, $email)
   {
-    $connection = ConnectionFabric::getInstance()->getConnection();
     $userExist = "'".strtolower($user)."'";
-    $stm = $connection->prepare("SELECT * FROM users WHERE user = $userExist");
+    $stm = $this->connection->prepare("SELECT * FROM users WHERE user = $userExist");
     $stm->execute();
     $isUserExist = $stm->fetch();
 
   	if($isUserExist == false)
   	{
       $emailExist = "'".$email."'";
-      $stm1 = $connection->prepare("SELECT * FROM users WHERE email = $emailExist");
+      $stm1 = $this->connection->prepare("SELECT * FROM users WHERE email = $emailExist");
       $stm1->execute();
       $isEmailExist = $stm1->fetch();
 
@@ -39,8 +47,7 @@ class ModelUsers
   	$email = htmlentities($email, ENT_QUOTES);
   	$pass = htmlentities($pass, ENT_QUOTES);
   	// $explode_trans = explode("/r/n", $trans);
-    $connection = ConnectionFabric::getInstance()->getConnection();
-    $addUserStatement = $connection->exec("INSERT INTO `users` (`user`, `email`, `pass`)
+    $addUserStatement = $this->connection->exec("INSERT INTO `users` (`user`, `email`, `pass`)
       VALUES ('".$user."','".$email."', '".$pass."')");
     if($addUserStatement == false)
     {
@@ -55,8 +62,7 @@ class ModelUsers
   public function login ($email, $pass, $remember)
   {
   	//checking security user by email and pass
-    $connection = ConnectionFabric::getInstance()->getConnection();
-    $stm = $connection->prepare("SELECT * FROM `users` WHERE email='$email' AND pass='$pass'");
+    $stm = $this->connection->prepare("SELECT * FROM `users` WHERE email='$email' AND pass='$pass'");
     $stm->execute();
     $count = $stm->fetchAll();
 
@@ -89,17 +95,15 @@ class ModelUsers
 
   public function getAllUsers()
   {
-    $connection = ConnectionFabric::getInstance()->getConnection();
     $query = 'SELECT id, user, email FROM users';
-    $allUsersStatement = $connection->query($query);
+    $allUsersStatement = $this->connection->query($query);
     return $allUsersStatement->fetchAll();
   }
 
   public function getUser($num)
   {
-    $connection = ConnectionFabric::getInstance()->getConnection();
     $query = "SELECT id, user, email FROM `users` WHERE id = '$num'";
-    $getUserStatement = $connection->query($query);
+    $getUserStatement = $this->connection->query($query);
     return $getUserStatement->fetch(PDO::FETCH_ASSOC);
   }
 
@@ -117,16 +121,13 @@ class ModelUsers
   	$email = htmlentities($email, ENT_QUOTES);
     $this->checkOnRussian($email);
 
-    $connection = ConnectionFabric::getInstance()->getConnection();
     $query = "UPDATE users SET user='$user', email='$email' WHERE id='$num'";
-    $editUserStatement = $connection->query($query);
+    $editUserStatement = $this->connection->query($query);
   }
 
   public function deleteUser($userId)
   {
-    $connection = ConnectionFabric::getInstance()->getConnection();
     $query = "DELETE FROM `translator`.`users` WHERE `users`.`id` ='$userId'";
-    $deleteWordStatement = $connection->query($query);
+    $deleteWordStatement = $this->connection->query($query);
   }
-
 }

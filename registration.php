@@ -1,6 +1,6 @@
 <?php
-require_once('models/connectionFabric.php');
-require_once('models/users.php');
+require_once('autoload.php');
+
 if(isset($_POST['ok']))
 {
 	if (empty($_POST['user']) || empty($_POST['email']) || empty($_POST['pass']))
@@ -9,7 +9,7 @@ if(isset($_POST['ok']))
 	}
 	else
 	{
-		$newUser = new ModelUsers;
+		$newUser = new Models\Users;
 		if($newUser->isUserExist($_POST['user'], $_POST['email']) == false)
 		{
 			$result = $newUser->addUser($_POST['user'], $_POST['email'], $_POST['pass']);

@@ -1,8 +1,7 @@
 <?php
-require_once('models/connectionFabric.php');
-require_once('models/users.php');
+require_once('autoload.php');
 
-$newUser = new ModelUsers;
+$newUser = new Models\Users;
 $newUser->logout();
 
 if(isset($_GET['cong']))

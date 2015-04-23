@@ -1,16 +1,10 @@
 <?php 
 require_once('autoload.php');
-require_once ('models/words.php');
+
+$words = new Models\Words();
+
+//require_once ('models/words.php');
 error_reporting(E_ALL);
-//Set columns names
-/*
-switch($columnIndex)
-{
-  case 'word' : return "A"; break;
-  case 'description': return "B"; break;
-  case 'translate': return "C"; break;
-}
-*/
 
 // Create new PHPExcel object
 $objPHPExcel = new PHPExcel();
@@ -21,9 +15,11 @@ array('word'=>'some word1', 'descr'=>'some descriprion1', 'trans'=>'some transla
 array('word'=>'some word2', 'descr'=>'some descriprion2', 'trans'=>'some translate2')
   );
 
+//Set columns names
 $columnIndex = array(
 'word'=>'A','descr'=>'B','trans'=>'C'
   );
+
 $headers = array(
 'word'=>'word', 'descr'=>'description', 'trans'=>'translation'
 );

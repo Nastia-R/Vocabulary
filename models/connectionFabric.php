@@ -1,4 +1,5 @@
 <?php
+namespace Models;
 require_once "databaseSettings.php";
 require_once "pdoConnection.php";
 

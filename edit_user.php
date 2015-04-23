@@ -1,9 +1,8 @@
 <?php
-require_once('models/connectionFabric.php');
+require_once('autoload.php');
 require_once ('models/acl.php');
-require_once('models/users.php');
 
-$newUser = new ModelUsers;
+$newUser = new Models\Users;
 if(isset($_GET['num']))
 {
 	$edit_row = $newUser->getUser($_GET['num']);

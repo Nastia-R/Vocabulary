@@ -1,7 +1,7 @@
 <?php
+require_once('autoload.php');
 require_once ('models/acl.php');
-require_once ('/models/words.php');
-$newWords = new ModelWords;
+$newWords = new Models\Words;
 // -=-=-=-=-= рандомайзер=-=-=-=--
 // 1) генерируем random ай ди
 $rand_id = $newWords->selectRandomId();
