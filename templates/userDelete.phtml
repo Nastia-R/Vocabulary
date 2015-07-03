@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+	<html>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="./css/style_delete.css">
+	<link rel="stylesheet" type="text/css" href="./css/style_panel.css">
+	<?php include "panel.phtml"; ?>
+	<div class="table-title">
+		<h1 align="center">Do you really want to remove this user?</h1>
+	</div>
+	<table class="table-fill">
+	<thead>
+	<tr>
+	<th class="text-left">ID</th>
+	<th class="text-left">User</th>
+	<th class="text-left">Email</th>
+	</tr>
+	<br/>
+	</thead>
+	<tbody class="table-hover">
+<?php if(isset($_GET['num'])):?>
+	<?php $userId = $_GET['num'];
+	$usersArray = $usersObject->getUser($userId); ?>
+	<tr>
+	<?php foreach($usersArray AS $data) :?>
+		<td><?= $data ?></td>
+	<?php endforeach; ?>
+	</tr>
+	</tbody>
+	</table>
+	<br/>
+<?php endif; ?>
+	<a name="userId" href="<?=$router->getUrl('user-delete', array('num'=>$userId, 'del'=>'1')) ?>" class="c">Delete</a>
+	<a name="back" href="users_list.php" class="c1">Cancel</a>
+</html>

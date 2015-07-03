@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css/style_add.css">
+		<link rel="stylesheet" type="text/css" href="css/style_panel.css">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Edit form</title>
+	</head>
+	<body>
+		<?php include "panel.phtml"; ?>
+		<div class="table-title">
+			<h1 align="center">Edit word: </h1>
+		</div>
+		
+		<?php if(isset($warning)):?>
+			<p class='answer_bad'><?=$warning;?></p>
+		<?php endif;?>
+
+		<?php if(isset($msg)):?>
+			<p class='answer_good'><?=$msg;?></p>
+		<?php endif;?>
+
+		<table align="center" class="text">
+			<form id="edit_form" action="<?=$router->getUrl('word-edit', array('num'=>$edit_row['id'])) ?>" method=POST>
+				<tr>
+					<td>Enter word (EN) :</td>
+					<td><input class="input-width" type="text" name="word" value="<?=$edit_row['word'] ?>"></td>
+				</tr>
+				<tr>
+					<td>Enter description : </td>
+					<td><textarea class="input-width" name="descr"><?=$edit_row['descr'] ?></textarea></td>
+				</tr>
+				<tr>
+					<td>Enter translate (RU) : </td>
+					<td><textarea class="input-width" name="trans"><?=$edit_row['trans'] ?></textarea></td>
+					<td><img width=30px src="img/question.png" title="Введите перевод на русском языке." alt="Image not found."></td>
+				</tr>
+				<tr>
+					<td align="right" colspan="2" ><a href="#" class="c" onclick="document.getElementById('edit_form').submit();">Update</a></td>
+				</tr>
+			</form>
+		</table>
+	</body>
+</html>
