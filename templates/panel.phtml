@@ -1,7 +1,6 @@
-<!DOCTYPE html>
 <div id="panel">
-	<a href="main.php" id="panel_link">Home</a> |
-	<a href="random.php" id="panel_link">Get rand word</a> |
-	<a href="users_list.php" id="panel_link">Users list</a> |
-	Hello, <?= "$email" . " !";?> | <a href="authorisation.php" id="panel_link">Logout</a>
+	<a href="<?=$router->getUrl('main') ?>" id="panel_link">Home</a> |
+	<a href="<?=$router->getUrl('randomWord') ?>" id="panel_link">Get rand word</a> |
+	<a href="<?=$router->getUrl('userList') ?>" id="panel_link">Users list</a> |
+	Hello, <?= "$email" . " !";?> | <a href="<?=$router->getUrl('authorisation') ?>" id="panel_link">Logout</a>
 </div>
