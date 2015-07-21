@@ -25,12 +25,12 @@
 			<td> <?=$row['user'] ?></td>
 			<td> <?=$row['email'] ?></td>
 			<td>
-				<a name="del" href="delete_user.php?num=<?= $row['id']?>">
+				<a name="del" href="<?=$router->getUrl('user-delete', array('num'=>$row['id'])) ?>">
 					<img width=20px src="img/delete.png" title="Remove this user">
 				</a>
 			</td>
 			<td>
-				<a name="del" href="edit_user.php?num=<?= $row['id']?>">
+				<a name="del" href="<?=$router->getUrl('user-edit', array('num'=>$row['id'])) ?>">
 					<img width=40px src="img/edit.png" title="Edit user's name">
 				</a>
 			</td>

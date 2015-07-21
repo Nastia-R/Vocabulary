@@ -10,7 +10,8 @@
 		<p class='answer_good'><?=$msg;?></p>
 	<?php endif; ?>
 	<div class="table-title">
-		<a href="add.php" class="c right">Add new word</a>
+		<a href="<?=$router->getUrl('revise'); ?>" class="c right">Revise</a>
+		<a href="<?=$router->getUrl('add-word'); ?>" class="c right">Add new word</a>
 		<a href="excelExport.php" class="c right">Text Export</a>
 		<h1 align="center">Vocabulary</h1>
 	</div>
@@ -34,12 +35,12 @@
 		<td> <?=$row['descr'] ?></td>
 		<td> <?=$row['trans'] ?></td>
 		<td>
-			<a name="del" href="delete.php?num=<?= $row['id']?>">
+			<a name="del" href="<?= $router->getUrl('word-delete', array('num'=>$row['id'])) ?>">
 				<img width=20px src="img/delete.png" title="Remove this note">
 			</a>
 		</td>
 		<td>
-			<a name="del" href="edit.php?num=<?= $row['id']?>">
+			<a name="del" href="<?= $router->getUrl('word-edit', array('num'=>$row['id'])) ?>">
 				<img width=40px src="img/edit.png" title="Edit this note">
 			</a>
 		</td>

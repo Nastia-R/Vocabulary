@@ -21,7 +21,7 @@
 		<?php endif;?>
 
 		<table align="center" class="text">
-			<form id="edit_form" action="edit.php?num=<?php echo $edit_row['id'] ?>" method=POST>
+			<form id="edit_form" action="<?=$router->getUrl('word-edit', array('num'=>$edit_row['id'])) ?>" method=POST>
 				<tr>
 					<td>Enter word (EN) :</td>
 					<td><input class="input-width" type="text" name="word" value="<?=$edit_row['word'] ?>"></td>

@@ -15,7 +15,6 @@
 .c:hover { 
 	border-color: #4E5066;
 	background: #4E5066; 
-
 } 
 
 .c:active { 
@@ -29,7 +28,9 @@ body {
   font-size: 16px;
   font-weight: 400;
   text-rendering: optimizeLegibility;
-  margin-top: -20px;
+  margin-top: 0px;
+  margin-left: 0px;
+  width: 100%;
 }
 
 div.table-title {

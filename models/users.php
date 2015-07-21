@@ -109,9 +109,9 @@ class Users
 
   private function checkOnRussian($field)
   {
-    if (!preg_match("#^[a-z0-9@]+$#i", $field))
+    if (!filter_var($field, FILTER_VALIDATE_EMAIL))
     {
-      die('Разрешены только символы a-z и цифры');
+      die('Введите правильный email адрес.');
     }
   }
 

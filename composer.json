@@ -15,7 +15,8 @@
     ],
     "autoload": {
         "psr-4": { 
-            "Models\\": "models"
+            "Models\\": "models",
+            "Controllers\\": "controllers"
         }
     },
     "require": {

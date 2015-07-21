@@ -30,9 +30,5 @@
 		</table>
 		<br/>
 	<?php endif; ?>
-	<?php if (isset($_GET['del']) && !empty($_GET['del'])):?>
-	<?php $wordsObject->deleteWord($wordId);
-	header("Location:main.php?cong=1"); ?>
-	<?php endif; ?>
-	<a name="wordId" href="?num=<?=$wordId;?>&del=1" class="c"?>DELETE</a>
-	<a name="back" href="main.php" php class="c1">To main page</a>
+	<a name="wordId" href="<?=$router->getUrl('word-delete', array('num'=>$wordId, 'del'=>'1')) ?>" class="c">DELETE</a>
+	<a name="back" href="<?=$router->getUrl('main') ?>" php class="c1">To main page</a>

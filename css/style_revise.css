@@ -1,0 +1,88 @@
+body {
+	background-color: #cacde3;
+	font-family: "Roboto", helvetica, arial, sans-serif;
+	font-size: 16px;
+	font-weight: 400;
+	text-rendering: optimizeLegibility;
+	width: 100%;
+	margin-top: 0%;
+}
+
+.table-fill {
+	position: relative;
+	background: white;
+	border-radius:3px;
+	border-collapse: collapse;
+	margin: auto;
+	padding-top: 3%;
+	margin-top: 3%;
+	width: 60%;
+	height: 500px;
+}
+
+#imgOkSign {
+	text-align: center;
+}
+img {
+	width: 100px;
+	height: 100px;
+}
+
+.bigEngWord {
+	font-family: "Roboto", helvetica, arial, sans-serif;
+	font-size: 66px;
+	font-weight: 300;
+	text-align: center;
+	margin: 4% auto 4% auto;
+	color:#333333;
+}
+
+#translationVariants {
+	height: 200px;
+	width: 100%;
+	position: absolute;
+	bottom:0;
+}
+
+.variant1 {
+	position: absolute;
+	width: 48.5%;
+	height: 100%;
+	line-height: 200px;
+	vertical-align: middle;
+	margin-right: 0.5%;
+	margin-left: 1%;
+	background: #F2F0EA;
+	text-align: center;
+	color: #333333;
+	font-family: "Roboto", helvetica, arial, sans-serif;
+	font-size: 33px;
+	border-radius:3px;
+	border-collapse: collapse;
+}
+
+.variant1:hover {
+	background: #EFE1D2;
+}
+
+.variant2 {
+	position: absolute;
+	width: 48.5%;
+	left: 50%;
+	height: 100%;
+	line-height: 200px;
+	vertical-align: middle;
+	margin-right: 1%;
+	margin-left: 0.5%;
+	background: #F2F0EA;
+	text-align: center;
+	color: #333333;
+	font-family: "Roboto", helvetica, arial, sans-serif;
+	font-size: 33px;
+	border-radius:3px;
+	border-collapse: collapse;
+}
+
+.variant2:hover {
+	background: #EFE1D2;
+}

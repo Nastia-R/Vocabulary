@@ -20,7 +20,7 @@
 		<?php endif;?>
 		 
 		<table align="center" class="text">
-			<form id="edit_form" action="edit_user.php?num=<?php echo $edit_row['id'] ?>" method=POST>
+			<form id="edit_form" action="<?=$router->getUrl('user-edit', array('num'=>$edit_row['id'])) ?>" method=POST>
 				<tr>
 					<td>Enter new user-name:</td>
 					<td><input class="input-width" type="text" name="user" value="<?=$edit_row['user'] ?>" /></td>

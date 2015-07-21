@@ -29,7 +29,9 @@ body {
   font-size: 16px;
   font-weight: 400;
   text-rendering: optimizeLegibility;
-  margin: 0px;
+  margin-top: 0px;
+  margin-left: 0px;
+  width: 100%;
 }
 
 div.table-title {

@@ -29,11 +29,6 @@
 	</table>
 	<br/>
 <?php endif; ?>
-
-<?php if (isset($_GET['del']) && !empty($_GET['del'])):?>
-	<?php $usersObject->deleteUser($userId);
-	header("Location:users_list.php?cong=1"); ?>
-<?php endif; ?>
-	<a name="userId" href="?num=<?=$userId ?>&del=1" class="c">Delete</a>
+	<a name="userId" href="<?=$router->getUrl('user-delete', array('num'=>$userId, 'del'=>'1')) ?>" class="c">Delete</a>
 	<a name="back" href="users_list.php" class="c1">Cancel</a>
 </html>
