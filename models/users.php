@@ -2,7 +2,7 @@
 namespace Models;
 use PDO;
 
-require_once('session.php');
+require_once('Session.php');
 class Users
 {
 	private $connection;
