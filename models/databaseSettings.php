@@ -4,22 +4,22 @@ class DatabaseSettings{
 
   public function getUser()
   {
-    return 'root';
+    return 'vkpost_vocab';
   }
 
   public function getPassword()
   {
-    return '';
+    return 'xkylbhsc';
   }
 
   public function getHost()
   {
-    return 'localhost';
+    return 'vkpost.mysql.ukraine.com.ua';
   }
 
   public function getDatabaseName()
   {
-    return 'translator';
+    return 'vkpost_vocab';
   }
 
   public function getCharset()
