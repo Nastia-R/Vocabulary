@@ -1,7 +1,7 @@
 <?php
 namespace Models;
-require_once "databaseSettings.php";
-require_once "pdoConnection.php";
+require_once "DatabaseSettings.php";
+require_once "PdoConnection.php";
 
 class ConnectionFabric {
 

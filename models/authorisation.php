@@ -1,6 +1,6 @@
 <?php
 namespace Models;
-require_once('session.php');
+require_once('Session.php');
 
 class Authorisation {
 
