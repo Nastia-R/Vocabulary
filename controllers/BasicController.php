@@ -3,9 +3,7 @@ namespace Controllers;
 
 use Models;
 
-class BasicController {
+abstract class BasicController {
 	
-	public function request()
-	{
-	}
+	abstract protected function request();
 }
