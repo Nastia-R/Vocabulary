@@ -22,7 +22,7 @@ class BrowseController extends BasicController {
 		}
 
 		$router = new Models\Router;
-		$email = $this->newWords->userEmail;
+		$email = Models\Authorisation::getInstance()->getEmail();
 		if(empty($data))
 		{
 			include "templates/aboutUs.phtml";
