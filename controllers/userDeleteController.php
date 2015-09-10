@@ -11,16 +11,16 @@ class UserDeleteController extends BasicController {
 
 	public function request()
 	{
+		$router = new Models\Router;
 		$usersObject = new Models\Users;
 		if (isset($_GET['del']) && !empty($_GET['del'])) 
 		{
 			$userId = $_GET['num'];
 			$usersObject->deleteUser($userId);
-			header("Location:index.php?page=usersList&cong=1");
+			header("Location:".$router->getUrl('usersList', array('cong'=>'1'))."");
 		}
 
 		$email = Models\Authorisation::getInstance()->getEmail();
-		$router = new Models\Router;
 		require_once('templates/userDelete.phtml');
 	}
 
