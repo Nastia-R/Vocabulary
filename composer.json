@@ -20,10 +20,9 @@
         }
     },
     "require": {
-        "php": ">=5.4.0"
-    },
-    "minimum-stability": "dev",
-    "require": {
+        "php": ">=5.4.0",
+        "hassankhan/config": "dev-master",
         "phpoffice/phpexcel": "dev-master"
-    }
+    },
+    "minimum-stability": "dev"
 }

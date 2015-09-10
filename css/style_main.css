@@ -193,3 +193,7 @@ float: center;
 	font-size:20px;
 	text-align: center;
 }
+
+.align-center {
+  text-align: center;
+}

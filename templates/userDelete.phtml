@@ -21,7 +21,7 @@
 	<?php $userId = $_GET['num'];
 	$usersArray = $usersObject->getUser($userId); ?>
 	<tr>
-	<?php foreach($usersArray AS $data) :?>
+	<?php foreach($usersArray as $data) :?>
 		<td><?= $data ?></td>
 	<?php endforeach; ?>
 	</tr>
@@ -29,6 +29,6 @@
 	</table>
 	<br/>
 <?php endif; ?>
-	<a name="userId" href="<?=$router->getUrl('user-delete', array('num'=>$userId, 'del'=>'1')) ?>" class="c">Delete</a>
-	<a name="back" href="users_list.php" class="c1">Cancel</a>
+	<a name="userId" href="<?=$router->getUrl('userDelete', array('num'=>$userId, 'del'=>'1')) ?>" class="c">Delete</a>
+	<a name="back" href="<?=$router->getUrl('usersList') ?>" class="c1">Cancel</a>
 </html>

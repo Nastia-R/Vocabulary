@@ -41,7 +41,7 @@ class RandomController {
 
 		$email = Models\Authorisation::getInstance()->getEmail();
 		$router = new Models\Router;
-		include "templates/random.phtml";
+		include "templates/wordRandom.phtml";
 	}
 
 }

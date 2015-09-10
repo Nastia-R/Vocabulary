@@ -22,8 +22,15 @@ class MainController {
 		}
 
 		$router = new Models\Router;
-		$email = Models\Authorisation::getInstance()->getEmail();
-		include "templates/main.phtml";
-
+		$email = $this->newWords->userEmail;
+		if(empty($data))
+		{
+			include "templates/noWords.phtml";
+		}
+		else
+		{
+			include "templates/main.phtml";
+		}
+		
 	}
 }

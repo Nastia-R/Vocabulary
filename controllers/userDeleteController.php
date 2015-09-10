@@ -16,7 +16,7 @@ class UserDeleteController {
 		{
 			$userId = $_GET['num'];
 			$usersObject->deleteUser($userId);
-			header("Location:users_list.php?cong=1");
+			header("Location:index.php?page=usersList&cong=1");
 		}
 
 		$email = Models\Authorisation::getInstance()->getEmail();

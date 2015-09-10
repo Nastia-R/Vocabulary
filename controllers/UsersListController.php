@@ -3,7 +3,7 @@ namespace Controllers;
 
 use Models;
 
-class UserListController{
+class UsersListController{
 
 	protected $newUser;
 
@@ -23,7 +23,7 @@ class UserListController{
 
 		$router = new Models\Router;
 		$email = Models\Authorisation::getInstance()->getEmail();
-		include "templates/users_list.phtml";
+		include "templates/usersList.phtml";
 	}
 }
 

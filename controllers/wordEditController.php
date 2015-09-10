@@ -14,7 +14,10 @@ class WordEditController {
 		if(isset($_GET['num']))
 		{
 			$newWords = new Models\Words;
-			$edit_row = $newWords->getWord($_GET['num']);
+			$email = Models\Authorisation::getInstance()->getEmail();
+			$userId = $newWords->getUserIdByEmail($email)->user_id;
+			
+			$edit_row = $newWords->getWord($_GET['num'], $userId);
 			//Проверка на отправку формы
 			if(isset($_POST['word']))
 			{
@@ -26,7 +29,7 @@ class WordEditController {
 				else
 				{
 					$newWords->editWord($_GET['num'], $_POST['word'], $_POST['descr'], $_POST['trans']);
-					$edit_row = $newWords->getWord($_GET['num']);
+					$edit_row = $newWords->getWord($_GET['num'], $userId);
 					//вставка прошла успешно
 					$msg = "Данные успешно обновлены!";
 				}

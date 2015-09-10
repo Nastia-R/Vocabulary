@@ -5,17 +5,23 @@ use PDO;
 class Words 
 {
   private $connection;
+  protected $userId;
+  public $userEmail;
 
   public function __construct()
   {
     $this->connection = ConnectionFabric::getInstance()->getConnection();
+    $this->userEmail = Authorisation::getInstance()->getEmail();
+    $this->userId = $this->getUserIdByEmail($this->userEmail)->user_id;
   }
 
   public function getAllWords()
   {
-    $query = 'SELECT * FROM words';
+    $userId = $this->userId;
+    $query = 'SELECT id, word, descr, trans FROM words WHERE user_id = "'.$userId.'"';
     $allWordsStatement = $this->connection->query($query);
-    return $allWordsStatement->fetchAll();
+    $wordsArray = $allWordsStatement->fetchAll();
+    return $wordsArray;
   }
 
   public function selectRandomId ()
@@ -33,9 +39,9 @@ class Words
   public function getWordById($id)
   {
     $query = "SELECT word FROM `words` WHERE id = '$id'";
-    $randomWordStatement = $this->connection->query($query);
-    $randomWordArray = $randomWordStatement->fetch();
-    return $randomWordArray['word'];
+    $wordRandomStatement = $this->connection->query($query);
+    $wordRandomArray = $wordRandomStatement->fetch();
+    return $wordRandomArray['word'];
   }
 
   public function getTranslationById($id)
@@ -48,8 +54,9 @@ class Words
 
   public function isWordExist ($word)
   {
+    $userId = $this->userId;
     $wordExist = "'".strtolower($word)."'";
-    $stm = $this->connection->prepare("SELECT * FROM `words` WHERE `word` = $wordExist");
+    $stm = $this->connection->prepare("SELECT * FROM `words` WHERE `word` = $wordExist AND `user_id` = $userId");
     $stm->execute();
     $count = $stm->fetchAll();
   	if($count == false)
@@ -62,20 +69,20 @@ class Words
   	}
   }
 
-  public function addWord($word, $description, $translation)
+  public function addWord($word, $description, $translation, $userId)
   {
   	$word = htmlentities($word, ENT_QUOTES);
-  	$description = ucfirst(htmlentities($description, ENT_QUOTES));
+  	$description = htmlentities($description, ENT_QUOTES);
   	$translation = htmlentities($translation, ENT_QUOTES);
-    $addWordStatement = $this->connection->exec("INSERT INTO `words` (`word`, `descr`, `trans`)
-  		VALUES ('".$word."','".$description."', '".$translation."')");
+    $addWordStatement = $this->connection->exec("INSERT INTO `words` (`word`, `descr`, `trans`, `user_id`)
+  		VALUES ('".$word."','".$description."', '".$translation."','".$userId."')");
       
     return (bool) $addWordStatement;
   }
 
   public function getWord($num)
   {
-    $query = "SELECT * FROM words WHERE id = '$num'";
+    $query = "SELECT id, word, descr, trans FROM words WHERE id = '$num'";
     $getWordStatement = $this->connection->query($query);
     $getWordArray = $getWordStatement->fetch(PDO::FETCH_ASSOC);
     return $getWordArray;
@@ -97,4 +104,11 @@ class Words
     $deleteWordStatement = $this->connection->query($query);
   }
 
+  public function getUserIdByEmail($email)
+  {
+    $query = "SELECT user_id FROM users WHERE email = '$email'";
+    $getUserIdStatement = $this->connection->query($query);
+    $getUserId = $getUserIdStatement->fetch(PDO::FETCH_OBJ);
+    return $getUserId;
+  }
 }

@@ -95,23 +95,28 @@ class Users
 
   public function getAllUsers()
   {
-    $query = 'SELECT id, user, email FROM users';
+    $query = 'SELECT user_id, user, email FROM users';
     $allUsersStatement = $this->connection->query($query);
     return $allUsersStatement->fetchAll();
   }
 
   public function getUser($num)
   {
-    $query = "SELECT id, user, email FROM `users` WHERE id = '$num'";
+    $query = "SELECT user_id, user, email FROM `users` WHERE user_id = '$num'";
     $getUserStatement = $this->connection->query($query);
     return $getUserStatement->fetch(PDO::FETCH_ASSOC);
   }
 
-  private function checkOnRussian($field)
+  private function validateEmail($field)
   {
     if (!filter_var($field, FILTER_VALIDATE_EMAIL))
     {
-      die('Введите правильный email адрес.');
+      $msg = 'Введите правильный email адрес.';
+      return $msg;
+    }
+    else
+    {
+      return false;
     }
   }
 
@@ -119,15 +124,22 @@ class Users
   {
   	$user = htmlentities($user, ENT_QUOTES);
   	$email = htmlentities($email, ENT_QUOTES);
-    $this->checkOnRussian($email);
+    if($this->validateEmail($email))
+    {
+      $warning = $this->validateEmail($email);
+      return $warning;
+    }
 
-    $query = "UPDATE users SET user='$user', email='$email' WHERE id='$num'";
+    $query = "UPDATE users SET user='$user', email='$email' WHERE user_id='$num'";
     $editUserStatement = $this->connection->query($query);
+    return false;
   }
 
   public function deleteUser($userId)
   {
-    $query = "DELETE FROM `translator`.`users` WHERE `users`.`id` ='$userId'";
-    $deleteWordStatement = $this->connection->query($query);
+    $deleteUsersWords = "DELETE FROM `translator`.`words` WHERE `words`.`user_id` ='$userId'";
+    $deleteUsersWordsStatement = $this->connection->query($deleteUsersWords);
+    $query = "DELETE FROM `translator`.`users` WHERE `users`.`user_id` ='$userId'";
+    $deleteUserStatement = $this->connection->query($query);
   }
 }

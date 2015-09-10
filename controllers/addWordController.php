@@ -6,7 +6,7 @@ use Models;
 class AddWordController {
 
 	private $wordsModel;
-
+	
 	public function __construct()
 	{
 		$this->wordsModel = new Models\Words();
@@ -14,6 +14,7 @@ class AddWordController {
 
 	public function request()
 	{
+
 		if(isset($_POST['word']))
 		{
 			//Проверка на заполнение полей ввода слова и его перевода
@@ -25,7 +26,9 @@ class AddWordController {
 			{
 				if($this->wordsModel->isWordExist($_POST['word']) == false)
 				{
-					$result = $this->wordsModel->addWord($_POST['word'], $_POST['descr'], $_POST['trans']);
+					$email = Models\Authorisation::getInstance()->getEmail();
+					$userId = $this->wordsModel->getUserIdByEmail($email);
+					$result = $this->wordsModel->addWord($_POST['word'], $_POST['descr'], $_POST['trans'], $userId->user_id);
 					//Если вставка прошла успешно
 					if ($result)
 					{
@@ -44,6 +47,6 @@ class AddWordController {
 		}
 		$email = Models\Authorisation::getInstance()->getEmail();
 		$router = new Models\Router;
-		include "templates/add.phtml";
+		include "templates/wordAdd.phtml";
 	}
 }

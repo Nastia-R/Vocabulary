@@ -6,14 +6,14 @@ class Router {
 	public function getUrl($route, $parameters = array())
 	{
 		$routes = array(
-			'add-word'=>'index.php?page=add-word',
-			'word-delete'=>'index.php?page=word-delete',
-			'word-edit'=>'index.php?page=word-edit',
-			'user-delete'=>'index.php?page=user-delete',
-			'user-edit'=>'index.php?page=user-edit',
-			'randomWord'=>'index.php?page=randomWord',
+			'wordAdd'=>'index.php?page=wordAdd',
+			'wordDelete'=>'index.php?page=wordDelete',
+			'wordEdit'=>'index.php?page=wordEdit',
+			'userDelete'=>'index.php?page=userDelete',
+			'userEdit'=>'index.php?page=userEdit',
+			'wordRandom'=>'index.php?page=wordRandom',
 			'main'=>'index.php',
-			'userList'=>'index.php?page=userList',
+			'usersList'=>'index.php?page=usersList',
 			'revise'=>'index.php?page=revise',
 			'authorisation'=>'index.php?page=authorisation',
 			'registration'=>'index.php?page=registration'

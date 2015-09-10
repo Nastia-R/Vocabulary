@@ -18,7 +18,6 @@ class WordDeleteController {
 		{
 			$wordId = $_GET['num'];
 			$this->wordsModel->deleteWord($wordId);
-
 			header("Location:./index.php?cong=1");
 		}
 

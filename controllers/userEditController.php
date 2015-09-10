@@ -25,11 +25,18 @@ class UserEditController {
 				}
 				else
 				{
-					$newUser->editUser($_GET['num'], $_POST['user'], $_POST['email']);
-
-					$edit_row = $newUser->getUser($_GET['num']);
-					//вставка прошла успешно
-					$msg = "Данные успешно обновлены!";
+					
+					if($newUser->editUser($_GET['num'], $_POST['user'], $_POST['email']) != false)
+					{
+						$warning = $newUser->editUser($_GET['num'], $_POST['user'], $_POST['email']);
+					}
+					else
+					{
+						$edit_row = $newUser->getUser($_GET['num']);
+						//вставка прошла успешно
+						$msg = "Данные успешно обновлены!";
+					}
+					
 				}
 			}
 		}
