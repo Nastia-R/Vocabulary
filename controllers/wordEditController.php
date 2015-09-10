@@ -5,19 +5,23 @@ use Models;
 
 class WordEditController extends BasicController {
 
+	private $wordsObject;
+	private $usersObject;
+
 	public function __construct()
 	{
+		$this->wordsObject = new Models\Words();
+		$this->usersObject = new Models\Users();
 	}
 
 	public function request()
 	{
 		if(isset($_GET['num']))
 		{
-			$newWords = new Models\Words;
 			$email = Models\Authorisation::getInstance()->getEmail();
-			$userId = $newWords->getUserIdByEmail($email)->user_id;
+			$userId = $this->usersObject->getUserIdByEmail($email)->user_id;
 			
-			$edit_row = $newWords->getWord($_GET['num'], $userId);
+			$edit_row = $this->wordsObject->getWord($_GET['num'], $userId);
 			//Проверка на отправку формы
 			if(isset($_POST['word']))
 			{
@@ -28,8 +32,8 @@ class WordEditController extends BasicController {
 				}
 				else
 				{
-					$newWords->editWord($_GET['num'], $_POST['word'], $_POST['descr'], $_POST['trans']);
-					$edit_row = $newWords->getWord($_GET['num'], $userId);
+					$wordsObject->editWord($_GET['num'], $_POST['word'], $_POST['descr'], $_POST['trans']);
+					$edit_row = $wordsObject->getWord($_GET['num'], $userId);
 					//вставка прошла успешно
 					$msg = "Данные успешно обновлены!";
 				}

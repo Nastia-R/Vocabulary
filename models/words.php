@@ -8,11 +8,15 @@ class Words
   protected $userId;
   public $userEmail;
 
+  protected $usersObject;//shit-object
+
   public function __construct()
   {
     $this->connection = ConnectionFabric::getInstance()->getConnection();
     $this->userEmail = Authorisation::getInstance()->getEmail();
-    $this->userId = $this->getUserIdByEmail($this->userEmail)->user_id;
+    $this->usersObject = new Users();
+
+    $this->userId = $this->usersObject->getUserIdByEmail($this->userEmail)->user_id;//shit
   }
 
   public function getAllWords()
@@ -104,11 +108,4 @@ class Words
     $deleteWordStatement = $this->connection->query($query);
   }
 
-  public function getUserIdByEmail($email)
-  {
-    $query = "SELECT user_id FROM users WHERE email = '$email'";
-    $getUserIdStatement = $this->connection->query($query);
-    $getUserId = $getUserIdStatement->fetch(PDO::FETCH_OBJ);
-    return $getUserId;
-  }
 }

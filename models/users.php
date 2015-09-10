@@ -107,6 +107,14 @@ class Users
     return $getUserStatement->fetch(PDO::FETCH_ASSOC);
   }
 
+  public function getUserIdByEmail($email)
+  {
+    $query = "SELECT user_id FROM users WHERE email = '$email'";
+    $getUserIdStatement = $this->connection->query($query);
+    $getUserId = $getUserIdStatement->fetch(PDO::FETCH_OBJ);
+    return $getUserId;
+  }
+
   private function validateEmail($field)
   {
     if (!filter_var($field, FILTER_VALIDATE_EMAIL))
@@ -142,4 +150,5 @@ class Users
     $query = "DELETE FROM `translator`.`users` WHERE `users`.`user_id` ='$userId'";
     $deleteUserStatement = $this->connection->query($query);
   }
+
 }

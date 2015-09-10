@@ -5,15 +5,18 @@ use Models;
 
 class AddWordController extends BasicController {
 
-	private $wordsModel;
-	
+	private $wordsObject;
+	private $usersObject;
+
 	public function __construct()
 	{
-		$this->wordsModel = new Models\Words();
+		$this->wordsObject = new Models\Words();
+		$this->usersObject = new Models\Users();
 	}
 
 	public function request()
 	{
+		$email = Models\Authorisation::getInstance()->getEmail();
 
 		if(isset($_POST['word']))
 		{
@@ -24,11 +27,10 @@ class AddWordController extends BasicController {
 			}
 			else
 			{
-				if($this->wordsModel->isWordExist($_POST['word']) == false)
+				if($this->wordsObject->isWordExist($_POST['word']) == false)
 				{
-					$email = Models\Authorisation::getInstance()->getEmail();
-					$userId = $this->wordsModel->getUserIdByEmail($email);
-					$result = $this->wordsModel->addWord($_POST['word'], $_POST['descr'], $_POST['trans'], $userId->user_id);
+					$userId = $this->usersObject->getUserIdByEmail($email);
+					$result = $this->wordsObject->addWord($_POST['word'], $_POST['descr'], $_POST['trans'], $userId->user_id);
 					//Если вставка прошла успешно
 					if ($result)
 					{
@@ -45,7 +47,7 @@ class AddWordController extends BasicController {
 				}
 			}
 		}
-		$email = Models\Authorisation::getInstance()->getEmail();
+		
 		$router = new Models\Router;
 		include "templates/wordAdd.phtml";
 	}
