@@ -3,7 +3,7 @@ namespace Controllers;
 
 use Models;
 
-class MainController {
+class BrowseController {
 	
 	private $newWords;
 
@@ -25,12 +25,11 @@ class MainController {
 		$email = $this->newWords->userEmail;
 		if(empty($data))
 		{
-			include "templates/noWords.phtml";
+			include "templates/aboutUs.phtml";
 		}
 		else
 		{
-			include "templates/main.phtml";
+			include "templates/browse.phtml";
 		}
-		
 	}
 }

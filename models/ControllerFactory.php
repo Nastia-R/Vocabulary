@@ -9,6 +9,9 @@ class ControllerFactory {
 
 		switch ($page) 
 		{
+			case 'browse':
+				$controller = new Controllers\BrowseController();
+				break;
 			case 'wordAdd':
 				$controller = new Controllers\AddWordController();
 				break;
@@ -40,7 +43,7 @@ class ControllerFactory {
 				$controller = new Controllers\RegistrationController();
 				break;
 			default:
-				$controller = new Controllers\MainController();
+				$controller = new Controllers\AboutUsController();
 				break;
 		}
 
