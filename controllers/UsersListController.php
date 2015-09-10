@@ -3,7 +3,7 @@ namespace Controllers;
 
 use Models;
 
-class UsersListController{
+class UsersListController extends BasicController {
 
 	protected $newUser;
 

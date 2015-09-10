@@ -3,7 +3,7 @@ namespace Controllers;
 
 use Models;
 
-class UserDeleteController {
+class UserDeleteController extends BasicController {
 
 	public function __construct()
 	{

@@ -3,7 +3,7 @@ namespace Controllers;
 
 use Models;
 
-class ReviseController {
+class ReviseController  extends BasicController {
 
 	public function request()
 	{

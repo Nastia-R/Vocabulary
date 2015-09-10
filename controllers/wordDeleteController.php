@@ -3,7 +3,7 @@ namespace Controllers;
 
 use Models;
 
-class WordDeleteController {
+class WordDeleteController extends BasicController {
 
 	private $wordsModel;
 

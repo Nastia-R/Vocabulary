@@ -3,7 +3,7 @@ namespace Controllers;
 
 use Models;
 
-class WordEditController {
+class WordEditController extends BasicController {
 
 	public function __construct()
 	{

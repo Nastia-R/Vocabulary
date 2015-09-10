@@ -3,7 +3,7 @@ namespace Controllers;
 
 use Models;
 
-class AuthorisationController {
+class AuthorisationController extends BasicController {
 
 	private $newUser;
 	public function __construct()

@@ -3,7 +3,7 @@ namespace Controllers;
 
 use Models;
 
-class AjaxController {
+class AjaxController extends BasicController {
 	public function deleteWord() {
 		echo "dgsbgnsfhn";
 		die();

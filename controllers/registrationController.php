@@ -4,7 +4,7 @@ namespace Controllers;
 
 use Models;
 
-class RegistrationController {
+class RegistrationController extends BasicController {
 
 	private $newUser;
 	public function __construct()

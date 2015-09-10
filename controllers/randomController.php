@@ -3,7 +3,7 @@ namespace Controllers;
 
 use Models;
 
-class RandomController {
+class RandomController extends BasicController {
 
 	private $newWords;
 	public function __construct()

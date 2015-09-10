@@ -3,7 +3,7 @@ namespace Controllers;
 
 use Models;
 
-class UserEditController {
+class UserEditController extends BasicController {
 
 	public function __construct()
 	{

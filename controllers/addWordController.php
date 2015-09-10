@@ -3,7 +3,7 @@ namespace Controllers;
 
 use Models;
 
-class AddWordController {
+class AddWordController extends BasicController {
 
 	private $wordsModel;
 	
