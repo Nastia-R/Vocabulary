@@ -39,7 +39,7 @@ var app = {
 		});
 
 		this.init();
-		//setTimeout(this.showResult(), 0);
+		setTimeout(this.showResult(), 0);
 
 	},
 
