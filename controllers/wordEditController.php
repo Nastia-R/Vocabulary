@@ -32,8 +32,8 @@ class WordEditController extends BasicController {
 				}
 				else
 				{
-					$wordsObject->editWord($_GET['num'], $_POST['word'], $_POST['descr'], $_POST['trans']);
-					$edit_row = $wordsObject->getWord($_GET['num'], $userId);
+					$this->wordsObject->editWord($_GET['num'], $_POST['word'], $_POST['descr'], $_POST['trans']);
+					$edit_row = $this->wordsObject->getWord($_GET['num'], $userId);
 					//вставка прошла успешно
 					$msg = "Данные успешно обновлены!";
 				}

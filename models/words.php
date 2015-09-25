@@ -15,7 +15,6 @@ class Words
     $this->connection = ConnectionFabric::getInstance()->getConnection();
     $this->userEmail = Authorisation::getInstance()->getEmail();
     $this->usersObject = new Users();
-
     $this->userId = $this->usersObject->getUserIdByEmail($this->userEmail)->user_id;//shit
   }
 
