@@ -23,9 +23,21 @@ body {
 #imgOkSign {
 	text-align: center;
 }
+
 img {
 	width: 100px;
 	height: 100px;
+	position: absolute;
+	top: 10%;
+	left: 45%;
+}
+
+#progress {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 10%;
+	left: 45%;
 }
 
 .bigEngWord {
@@ -33,7 +45,7 @@ img {
 	font-size: 66px;
 	font-weight: 300;
 	text-align: center;
-	margin: 4% auto 4% auto;
+	margin: 20% auto 4% auto;
 	color:#333333;
 }
 
@@ -44,7 +56,7 @@ img {
 	bottom:0;
 }
 
-.variant1 {
+#variant1 {
 	position: absolute;
 	width: 48.5%;
 	height: 100%;
@@ -61,11 +73,11 @@ img {
 	border-collapse: collapse;
 }
 
-.variant1:hover {
+#variant1:hover {
 	background: #EFE1D2;
 }
 
-.variant2 {
+#variant2 {
 	position: absolute;
 	width: 48.5%;
 	left: 50%;
@@ -83,6 +95,6 @@ img {
 	border-collapse: collapse;
 }
 
-.variant2:hover {
+#variant2:hover {
 	background: #EFE1D2;
 }
