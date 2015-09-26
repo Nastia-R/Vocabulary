@@ -21,9 +21,17 @@ var app = {
 	currentWordId: 0,
 	progressBar: null,
 	userRightOrWrong: false,
+	timeoutId: 0,
 
 	load: function(words){
 		this.words = words;
+		this.initProgressBar();
+		this.initClickHandlers();
+		this.init();
+		setTimeout(this.showResult(), 0);
+	},
+
+	initProgressBar: function(){
 		this.progressBar = new ProgressBar.Circle('#progress', {
 		    color: '#B6B9D1',
 		    easing: 'linear',
@@ -37,10 +45,11 @@ var app = {
 		        bar.setText((bar.value() * 100).toFixed(0));
 		    }
 		});
+	},
 
-		this.init();
-		setTimeout(this.showResult(), 0);
-
+	initClickHandlers: function(){
+		var variants = $('#translationVariants');
+		variants.click(this.onVariantClick.bind(this));
 	},
 
 	init: function(){
@@ -48,10 +57,26 @@ var app = {
 		this.showQuestion();
 	},
 
+	onVariantClick: function(event){
+		var target = event.target;
+			
+		if(target.id == 'variant1' || target.id == 'variant2')
+		{
+			this.checkAnswer(target.id);
+		}
+	},
+
 	nextWord: function(){
 		this.setStateClear();
-		this.currentWordId++;
-		this.init();
+		if(!this.isLastWord())
+		{
+			this.currentWordId++;
+			this.init();
+		}
+		else
+		{
+			alert('There is no next word!');
+		}
 	},
 
 	showQuestion: function() {
@@ -64,10 +89,14 @@ var app = {
 		var rightVariant = document.getElementById('variant2');
 		rightVariant.innerHTML = this.config.variants[1];
 
+
+		this.cleanAnswerStyles();
 		this.startTimer();
 	},
 
 	checkAnswer: function(elementId){
+		clearTimeout(this.timeoutId);
+
 		var answerElement = document.getElementById(elementId);
 		var userAnswer = answerElement.innerHTML;
 
@@ -77,27 +106,47 @@ var app = {
 		if(userAnswer == this.config.answer)
 		{
 			this.setStateOk();
-			//suserRightOrWrong = true;
 		}
 		else
 		{
 			this.setStateWrong();
 		}
 
-		setTimeout(this.nextWord.bind(this), 500);
+		this.getCorrectElement();
+
+		if(!this.isLastWord())
+		{
+			this.timeoutId = setTimeout(this.nextWord.bind(this), 400);
+		}
+		else
+		{
+			//$('.table-fill').hide();
+			$('.table-fill').html('');
+			$('.table-fill').append($('#resultTable'));
+			$('#resultTable').fadeIn(1000, function() {
+				$(this).attr('style', 'display:block');
+			});
+			
+		}
+		
+	},
+
+	isLastWord: function(){
+		return (this.currentWordId >= this.words.length - 1)
 	},
 
 	hideProgress: function(){
-		document.getElementById('progress').setAttribute('style', 'display: hidden;');
+		document.getElementById('progress').setAttribute('style', 'display: none;');
 	},
 
 	startTimer: function(){
 		document.getElementById('progress').setAttribute('style', 'display: block;');
-		document.getElementById('imgOkSign').setAttribute('style', 'display: hidden;');
 		this.progressBar.set(0);
 		this.progressBar.animate(1, {}, function(){
+			this.hideProgress();
+			document.getElementById('imgOkSign').setAttribute('style', 'display: block;');
+			this.setStateWrong();
 			this.getCorrectElement();
-			this.setStateOk();
 		}.bind(this));
 	},
 
@@ -126,7 +175,6 @@ var app = {
 
 		document.getElementById('variant1').setAttribute('style', '');
 		document.getElementById('variant2').setAttribute('style', '');
-
 	},
 
 	showResult: function(){
@@ -147,6 +195,7 @@ var app = {
 				rightVariant.innerHTML = this.config.variants[1];
 			}
 		}
+
 	},
 
 	setStateOk: function(){
@@ -169,43 +218,3 @@ var app = {
 	app.load(words);
 
 })();
-
-var variant1 = $('#variant1');
-var variant2 = $('#variant2');
-
-var variants = $('#translationVariants');
-
-variants.click(function(event) {
-	var target = event.target;
-	
-	if(target.id == 'variant1' || target.id == 'variant2')
-	{
-		app.checkAnswer(target.id);
-	}
-})
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-var i = 0;
-var helloNastia = function() {
-	alert('Hello Nastia!'+ i);
-	i++;
-
-	if(i == 5)
-	{
-		clearInterval(id);
-	}
-
-};
-var id = setInterval(helloNastia, 3000);
-*/

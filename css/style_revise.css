@@ -22,6 +22,7 @@ body {
 
 #imgOkSign {
 	text-align: center;
+	display: none;
 }
 
 img {
