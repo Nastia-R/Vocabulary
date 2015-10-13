@@ -27,13 +27,22 @@ class Words
     return $wordsArray;
   }
 
-  public function selectRandomId ()
+  public function getSomeWords($count)
   {
-    $query = "SELECT MAX(`id`) AS max_id , MIN(`id`) AS min_id FROM `words`";
+    $userId = $this->userId;
+    $query = 'SELECT id, word, descr, trans FROM words WHERE user_id = "'.$userId.'" LIMIT '.$count;
+    $wordsStatement = $this->connection->query($query);
+    $wordsArray = $wordsStatement->fetchAll(PDO::FETCH_ASSOC);
+    return $wordsArray;
+  }
+
+  public function selectRandomId()
+  {
+    $query = "SELECT MAX(`id`) AS max_id , MIN(`id`) AS min_id FROM `words` WHERE `user_id`= $this->userId";
     $randomIdStatement = $this->connection->query($query);
     $randomIdObject = $randomIdStatement->fetchObject();
     $randomId = mt_rand( $randomIdObject->min_id , $randomIdObject->max_id );
-    $query1 =  "SELECT * FROM `words` WHERE `id` >= $randomId LIMIT 0,1 ";
+    $query1 =  "SELECT * FROM `words` WHERE `id` >= $randomId AND `user_id`= $this->userId LIMIT 0,1";
     $result = $this->connection->query($query1);
   	$data = $result->fetch();
   	return $data['id'];
@@ -105,6 +114,13 @@ class Words
   {
     $query = "DELETE FROM `translator`.`words` WHERE `words`.`id` ='$num'";
     $deleteWordStatement = $this->connection->query($query);
+  }
+
+  public function recordRandomWordAnswer($wordId, $trigger)
+  {
+    $recordingDate = date('Y-m-d H:i:s');
+    $query = "INSERT INTO `random_history` (`word_id`, `answer`, `date`) VALUES ('".$wordId."','".$trigger."','".$recordingDate."')";
+    $recordAnswerStatement = $this->connection->query($query);
   }
 
 }

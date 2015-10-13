@@ -99,3 +99,19 @@ img {
 #variant2:hover {
 	background: #EFE1D2;
 }
+
+#variant1.disabled,
+#variant2.disabled {
+	background-color: #ddd;
+	color: #888;
+}
+
+#variant1.rightVariant,
+#variant2.rightVariant {
+	background-color: #BFDEB4;
+}
+
+#variant1.wrongVariant,
+#variant2.wrongVariant {
+	background-color: #F5A9A9;
+}

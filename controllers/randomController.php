@@ -32,11 +32,15 @@ class RandomController extends BasicController {
 			if($trans == $userTrans)
 			{
 				$msg = "Right!";
+				$trigger = 'right';
 			}
 			else
 			{
 				$msg = "Wrong! Right translation is \"$trans\" and you typed \"$userTrans\"";
+				$trigger = 'wrong';
 			}
+
+			$this->newWords->recordRandomWordAnswer($rand_id, $trigger);
 		}
 
 		$email = Models\Authorisation::getInstance()->getEmail();

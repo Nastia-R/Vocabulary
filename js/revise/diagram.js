@@ -1,59 +1,49 @@
-function getRandomColor() {
-    var randomNumber = function() {
-        return Math.floor((Math.random() * 255));
-    };
-    return {
-        r: randomNumber()
-        ,g: randomNumber()
-        ,b: randomNumber()
-    };
+function getBarHeight(bar, maxHeight) {
+    if($('#'+bar).attr('id') == 'barRemember')
+    {
+    	return calculateHeightInPercent(maxHeight, app.calculateAnswersNum().right.length);
+    }
+	else if($('#'+bar).attr('id') == 'barMistakes')
+	{
+		return calculateHeightInPercent(maxHeight, app.calculateAnswersNum().wrong.length);
+	}
+	else if($('#'+bar).attr('id') == 'barTimeOut')
+	{
+		return calculateHeightInPercent(maxHeight, app.calculateAnswersNum().timeOut.length);
+	}
 }
 
-//console.log('Разрешение экрана: <b>'+window.innerWidth+'×'+window.innerHeight+'px.</b>');
-
-function setBackgroundColor(elem, rgb) {
-	var element = document.getElementById(elem);
-    element.style.backgroundColor = "rgb("+ rgb.r + "," + rgb.g + "," + rgb.b + ")";
+function getBarTextValue(bar) {
+    if($('#'+bar).attr('id') == 'barRemember')
+    {
+    	return app.calculateAnswersNum().right.length;
+    }
+	else if($('#'+bar).attr('id') == 'barMistakes')
+	{
+		return app.calculateAnswersNum().wrong.length;
+	}
+	else if($('#'+bar).attr('id') == 'barTimeOut')
+	{
+		return app.calculateAnswersNum().timeOut.length;
+	}
 }
 
-function getRandomHeight() {
-        return Math.floor((Math.random() * 100) + 1);
+function calculateHeightInPercent(maxHeight, neededHeight) {
+	var heightInPercent = (parseInt(neededHeight)*100)/parseInt(maxHeight);
+	return heightInPercent;
 }
 
-function setHeight(elem, text, height) {
+function setHeight(elem, text, height, textValue) {
 	var element = document.getElementById(elem);
     element.style.height = height + "%";
-	var text = document.getElementById(text);
-	
-	if(height > 13)
-		text.innerHTML = height + "%";
-	else
-	{
-		text.style.position = "relative";
-		text.style.top = "-65px";
-		text.style.color = "rgb(0, 0, 0)";
-		text.style.opacity = "0.6";
-		text.innerHTML = height + "%";
-	}
 }
 
-function calculateTextColor(rgb, elem) {
-	var element = document.getElementById(elem);
-	var sum = rgb.r + rgb.g + rgb.b;
-	
-	if(sum > 560)
-	{
-		element.style.color = "rgb(0, 0, 0)";
-		element.style.opacity = "0.6";
-	}
-	else
-	{
-		element.style.color = "rgb(255, 255, 255)";
-		element.style.opacity = "0.8";
-	}
+function setAnswerCount(answerName, bar){
+	document.getElementById(answerName).innerHTML += ' ' + getBarTextValue(bar);
 }
 
-function animatedBar(elem, text, height) {
+
+function animatedBar(elem, text, height, textValue) {
 	var element = document.getElementById(elem);
 	var text = document.getElementById(text);
 	var currentHeight = 0;
@@ -67,7 +57,7 @@ function animatedBar(elem, text, height) {
 			else
 			{
 				text.style.position = "relative";
-				text.style.top = "-65px";
+				text.style.top = "-65%";
 				text.style.color = "rgb(0, 0, 0)";
 				text.style.opacity = "0.6";
 				text.innerHTML = currentHeight + "%";
@@ -86,22 +76,16 @@ function animatedBar(elem, text, height) {
 	}, 8)
 }
 
-var bar1Color = getRandomColor();
-var bar2Color = getRandomColor();
-var bar3Color = getRandomColor();
+function startDiagram(maxHeight) {
+	var barRememberHeight = getBarHeight('barRemember', maxHeight);
+	var barMistakesHeight = getBarHeight('barMistakes', maxHeight);
+	var barTimeOutHeight = getBarHeight('barTimeOut', maxHeight);
 
-calculateTextColor(bar1Color, "text1");
-calculateTextColor(bar2Color, "text2");
-calculateTextColor(bar3Color, "text3");
+	setHeight("barRemember", "textRemember", barRememberHeight, getBarTextValue('barRemember'));
+	setHeight("barMistakes", "textMistakes", barMistakesHeight, getBarTextValue('barMistakes'));
+	setHeight("barTimeOut", "textTimeOut", barTimeOutHeight, getBarTextValue('barTimeOut'));
 
-setBackgroundColor("bar1", bar1Color);
-setBackgroundColor("bar2", bar2Color);
-setBackgroundColor("bar3", bar3Color);
-
-var bar1Height = getRandomHeight();
-var bar2Height = getRandomHeight();
-var bar3Height = getRandomHeight();
-
-animatedBar("bar1", "text1", bar1Height);
-animatedBar("bar2", "text2", bar2Height);
-animatedBar("bar3", "text3", bar3Height);
+	setAnswerCount('nameRemember', 'barRemember');
+	setAnswerCount('nameMistakes', 'barMistakes');
+	setAnswerCount('nameTimeOut', 'barTimeOut');
+}

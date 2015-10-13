@@ -42,6 +42,9 @@ class ControllerFactory {
 			case 'registration':
 				$controller = new Controllers\RegistrationController();
 				break;
+			case 'getWordsForRevise':
+				$controller = new Controllers\GetWordsForReviseController();
+				break;
 			default:
 				$controller = new Controllers\AboutUsController();
 				break;

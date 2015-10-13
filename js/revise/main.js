@@ -19,9 +19,11 @@ var app = {
 	words: [],
 	config: {},
 	currentWordId: 0,
+	userAnswers: {right:[], wrong:[], timeOut:[]},
 	progressBar: null,
 	userRightOrWrong: false,
 	timeoutId: 0,
+	timerOut: false,
 
 	load: function(words){
 		this.words = words;
@@ -58,16 +60,44 @@ var app = {
 	},
 
 	onVariantClick: function(event){
-		var target = event.target;
-			
-		if(target.id == 'variant1' || target.id == 'variant2')
+		if(this.isVariantsDisabled())
 		{
+			return;
+		}
+		var target = event.target;
+		if(this.timerOut)
+		{
+			if($(target).attr('class') != 'disabled')
+			{
+				this.onTimeOut();
+			}
+		}
+		else if((target.id == 'variant1' || target.id == 'variant2'))
+		{	
 			this.checkAnswer(target.id);
+		}
+	},
+
+	onTimeOut: function(){
+		clearTimeout(this.timeoutId);
+		this.nextWordOrShowResult(0);
+	},
+
+	nextWordOrShowResult: function(timeOut){
+		if(!this.isLastWord())
+		{
+			this.timeoutId = setTimeout(this.nextWord.bind(this), timeOut);
+		}
+		else
+		{
+			this.showResultTable();
 		}
 	},
 
 	nextWord: function(){
 		this.setStateClear();
+		this.enableVariants();
+
 		if(!this.isLastWord())
 		{
 			this.currentWordId++;
@@ -80,55 +110,75 @@ var app = {
 	},
 
 	showQuestion: function() {
-		var wordElement = document.getElementById('word');
-		wordElement.innerHTML = this.config.word;
-
-		var leftVariant = document.getElementById('variant1');
-		leftVariant.innerHTML = this.config.variants[0];
-
-		var rightVariant = document.getElementById('variant2');
-		rightVariant.innerHTML = this.config.variants[1];
-
+		$('#word').html(this.config.word);
+		$('#variant1').html(this.config.variants[0]);
+		$('#variant2').html(this.config.variants[1]);
 
 		this.cleanAnswerStyles();
 		this.startTimer();
+		this.timerOut = false;
 	},
 
 	checkAnswer: function(elementId){
 		clearTimeout(this.timeoutId);
 
-		var answerElement = document.getElementById(elementId);
-		var userAnswer = answerElement.innerHTML;
+		var answerElement = $('#'+elementId);
+		var userAnswer = answerElement.html();
 
 		this.hideProgress();
 		document.getElementById('imgOkSign').setAttribute('style', 'display: block;');
 
 		if(userAnswer == this.config.answer)
 		{
+			this.userAnswers.right.push(this.config.word); 
+			console.log('rightArray: ' + this.userAnswers.right);
 			this.setStateOk();
+			this.getCorrectElement(answerElement, true);
 		}
-		else
-		{
+		else if(userAnswer != this.config.answer && userAnswer != undefined)
+		{	
+			this.userAnswers.wrong.push(this.config.word);
+			console.log('wrongArray: ' + this.userAnswers.wrong);
 			this.setStateWrong();
+			this.getCorrectElement(answerElement, false);
 		}
 
-		this.getCorrectElement();
+		this.disableVariants();
+		this.nextWordOrShowResult(400);
+	},
 
-		if(!this.isLastWord())
+	disableVariants: function(){
+		this.variantsDisabled = true;
+	},
+
+	enableVariants: function(){
+		this.variantsDisabled = false;
+	},
+
+	isVariantsDisabled: function(){
+		return this.variantsDisabled;
+	},
+
+	showResultTable: function(){
+		$('.table-fill').html('');
+		var result = this.calculateAnswersNum();
+		var bars = [];
+		bars.push({id:'#barRemember', number: result.right.length});
+		bars.push({id:'#barMistakes', number: result.wrong.length});
+		bars.push({id:'#barTimeOut', number: result.timeOut.length});
+
+		for(var i = 0; i < bars.length; i++)
 		{
-			this.timeoutId = setTimeout(this.nextWord.bind(this), 400);
+			if(bars[i].number == 0)
+			{
+				$(bars[i].id).css({'display': 'none'});
+			}
 		}
-		else
-		{
-			//$('.table-fill').hide();
-			$('.table-fill').html('');
-			$('.table-fill').append($('#resultTable'));
-			$('#resultTable').fadeIn(1000, function() {
-				$(this).attr('style', 'display:block');
-			});
-			
-		}
-		
+
+		$('.table-fill').append($('#resultTable'));
+		var altogetherWords = this.words.length;
+		startDiagram(altogetherWords);
+		$('#resultTable').fadeIn(1000);
 	},
 
 	isLastWord: function(){
@@ -146,35 +196,41 @@ var app = {
 			this.hideProgress();
 			document.getElementById('imgOkSign').setAttribute('style', 'display: block;');
 			this.setStateWrong();
-			this.getCorrectElement();
+			this.setDisabledClass();
+			this.timerOut = true;
 		}.bind(this));
 	},
 
-	getCorrectElement: function(){
-		var leftElement = document.getElementById('variant1');
-		var leftAnswer = leftElement.innerHTML;
-		var rightElement = document.getElementById('variant2');
-		var rightAnswer = rightElement.innerHTML;
+	getCorrectElement: function(element, rightOrWrong){
 
-		if(leftAnswer == this.config.answer)
+		if(rightOrWrong)
 		{
-			document.getElementById('variant1').setAttribute('style', 'background-color: #D2EEC8;');
+			element.addClass('rightVariant');
 		}
-		else if(rightAnswer == this.config.answer)
+		else
 		{
-			document.getElementById('variant2').setAttribute('style', 'background-color: #D2EEC8;');
+			element.addClass('wrongVariant');
 		}
 
 	},
 
-	cleanAnswerStyles: function(){
-		var leftElement = document.getElementById('variant1');
-		var leftAnswer = leftElement.innerHTML;
-		var rightElement = document.getElementById('variant2');
-		var rightAnswer = rightElement.innerHTML;
+	setDisabledClass: function(){
+		if($('#variant1').html() == this.config.answer)
+		{
+			$('#variant2').addClass('disabled');
+		}
+		else if($('#variant2').html() == this.config.answer)
+		{
+			$('#variant1').addClass('disabled');
+		}
 
-		document.getElementById('variant1').setAttribute('style', '');
-		document.getElementById('variant2').setAttribute('style', '');
+		this.userAnswers.timeOut.push(this.config.word);
+		console.log('timeOutArray: ' + this.userAnswers.timeOut);
+	},
+
+	cleanAnswerStyles: function(){
+		$('#variant1').removeAttr('class');
+		$('#variant2').removeAttr('class');
 	},
 
 	showResult: function(){
@@ -198,6 +254,10 @@ var app = {
 
 	},
 
+	calculateAnswersNum: function(){
+		return {'right': this.userAnswers.right, 'wrong': this.userAnswers.wrong, 'timeOut' : this.userAnswers.timeOut};
+	},
+
 	setStateOk: function(){
 		var state = document.getElementById('imgOkSign');
 		state.innerHTML = '<img src="./img/ok.png"/>';
@@ -212,9 +272,9 @@ var app = {
 		var state = document.getElementById('imgOkSign');
 		state.innerHTML = '';
 	}
+
 };
 
 (function() {
 	app.load(words);
-
 })();

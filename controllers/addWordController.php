@@ -16,6 +16,8 @@ class AddWordController extends BasicController {
 
 	public function request()
 	{
+		sleep(3);
+		throw new \Exception('her');
 		$email = Models\Authorisation::getInstance()->getEmail();
 
 		if(isset($_POST['word']))

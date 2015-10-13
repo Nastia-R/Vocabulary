@@ -17,7 +17,8 @@ class Router {
 			'usersList'=>'index.php?page=usersList',
 			'revise'=>'index.php?page=revise',
 			'authorisation'=>'index.php?page=authorisation',
-			'registration'=>'index.php?page=registration'
+			'registration'=>'index.php?page=registration',
+			'getWordsForRevise' =>'index.php?page=getWordsForRevise'
 			);
 
 		if(array_key_exists($route, $routes))
