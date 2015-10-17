@@ -23,7 +23,8 @@
     "require": {
         "php": ">=5.4.0",
         "hassankhan/config": "dev-master",
-        "phpoffice/phpexcel": "dev-master"
+        "phpoffice/phpexcel": "dev-master",
+        "squizlabs/php_codesniffer": "2.*"
     },
     "minimum-stability": "dev"
 }
